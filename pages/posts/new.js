@@ -1,7 +1,8 @@
 import React from 'react';
+import PostForm from '../../components/PostForm';
 
-export default function New() {
+export default function NewOrder() {
   return (
-    <div>new</div>
+    <PostForm />
   );
 }

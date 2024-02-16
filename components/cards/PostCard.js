@@ -10,7 +10,7 @@ export default function PostCard({ postObj }) {
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
         <hr />
-        <p>content: {postObj.content}</p>
+        <p>{postObj.content}</p>
         <hr />
         <Link href={`/posts/${postObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>
