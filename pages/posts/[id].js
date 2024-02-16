@@ -20,11 +20,6 @@ export default function SinglePost() {
     });
   }, [post]);
 
-  // postDetails.comments?.forEach((c) => {
-  //   console.warn(c);
-  // });
-  console.warn(comments);
-
   return (
     <>
       <div>
@@ -36,7 +31,7 @@ export default function SinglePost() {
         </div>
         <div className="post-comments">
           {comments.map((comment) => (
-            <CommentCard commentObj={comment} />
+            <CommentCard key={comment.id} commentObj={comment} />
           ))}
         </div>
       </div>
