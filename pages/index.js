@@ -20,7 +20,7 @@ function Home() {
   console.warn(posts);
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="justify-content-center align-content-center"
       style={{
         height: '90vh',
         padding: '30px',
