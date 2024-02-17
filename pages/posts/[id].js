@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import { getSinglePost, deletePost } from '../../utils/data/postData';
 import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
+import CommentForm from '../../components/CommentForm';
 
 export default function SinglePost() {
   const router = useRouter();
@@ -23,12 +24,18 @@ export default function SinglePost() {
 
   const { user } = useAuth();
 
-  useEffect(() => {
+  const getPostDetails = useCallback(() => {
     getSinglePost(post).then((res) => {
       setPostDetails(res);
       setComments(res.comments);
     });
   }, [post]);
+
+  console.warn('loop');
+
+  useEffect(() => {
+    getPostDetails();
+  }, [getPostDetails]);
 
   return (
     <>
@@ -48,6 +55,7 @@ export default function SinglePost() {
             </>
           ) : ''}
         </div>
+        <CommentForm getPostDetails={getPostDetails} postId={postDetails.id} />
         <div className="post-comments">
           {comments.map((comment) => (
             <CommentCard key={comment.id} commentObj={comment} />

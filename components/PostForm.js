@@ -33,8 +33,6 @@ function PostForm({ obj }) {
     }
   }, [obj]);
 
-  console.warn(formInput);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -121,10 +119,7 @@ function PostForm({ obj }) {
 
 PostForm.propTypes = {
   obj: PropTypes.shape({
-    name: PropTypes.string,
-    customer_email: PropTypes.string,
-    customer_phone: PropTypes.string,
-    sale: PropTypes.bool,
+    content: PropTypes.string,
     title: PropTypes.string,
     category: PropTypes.number,
     id: PropTypes.number,
