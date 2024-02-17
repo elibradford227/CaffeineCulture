@@ -18,6 +18,7 @@ function Home() {
   }, [user.uid]);
 
   console.warn(posts);
+
   return (
     <div
       className="justify-content-center align-content-center"
