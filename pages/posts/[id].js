@@ -15,6 +15,7 @@ export default function SinglePost() {
   const [postDetails, setPostDetails] = useState([]);
   const [comments, setComments] = useState([]);
   const [editModeCommentId, setEditModeCommentId] = useState(null);
+  const [change, setChange] = useState(false);
 
   const handleEditClick = (commentId) => {
     setEditModeCommentId(commentId);
@@ -44,7 +45,7 @@ export default function SinglePost() {
 
   useEffect(() => {
     getPostDetails();
-  }, [getPostDetails]);
+  }, [getPostDetails, change]);
 
   return (
     <>
@@ -73,7 +74,7 @@ export default function SinglePost() {
             editModeCommentId === comment.id ? (
               <CommentForm key={comment.id} obj={comment} onCancelEdit={handleCancelEdit} getPostDetails={getPostDetails} postId={postDetails.id} />
             ) : (
-              <CommentCard key={comment.id} commentObj={comment} onEditClick={() => handleEditClick(comment.id)} uid={user.uid} />
+              <CommentCard key={comment.id} commentObj={comment} onEditClick={() => handleEditClick(comment.id)} uid={user.uid} setChange={setChange} />
             )
           ))}
         </div>
