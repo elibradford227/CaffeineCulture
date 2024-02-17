@@ -21,12 +21,18 @@ function PostForm({ obj }) {
 
   const { user } = useAuth();
 
+  console.warn(obj);
+
   useEffect(() => {
     getCategories().then((res) => setCategories(res));
   }, []);
 
   useEffect(() => {
-    if (obj.id) setFormInput(obj);
+    if (obj.id) {
+      const editObj = obj;
+      editObj.category = obj.category.id;
+      setFormInput(editObj);
+    }
   }, [obj]);
 
   const handleChange = (e) => {
