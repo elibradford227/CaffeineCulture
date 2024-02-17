@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function PostCard({ postObj }) {
   return (
-    <Card style={{ width: '20rem', marginLeft: '1.25em' }} className="PostCard">
+    <Card style={{ width: '20rem', marginLeft: '1.25em' }}>
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
         <hr />

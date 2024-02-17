@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
-import { getSinglePost } from '../../utils/data/postData';
+import { getSinglePost, deletePost } from '../../utils/data/postData';
 import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -13,6 +13,13 @@ export default function SinglePost() {
 
   const [postDetails, setPostDetails] = useState([]);
   const [comments, setComments] = useState([]);
+
+  const deleteThisPost = async () => {
+    if (window.confirm('Delete post?')) {
+      await deletePost(postDetails.id);
+      router.push('/');
+    }
+  };
 
   const { user } = useAuth();
 
@@ -33,9 +40,12 @@ export default function SinglePost() {
           <h2>Posted On: {postDetails.date}</h2>
           <h2>{postDetails.category?.name}</h2>
           {user.uid === postDetails.user?.uid ? (
-            <Link href={`/posts/edit/${postDetails.id}`} passHref>
-              <Button variant="secondary" className="order-item-button">Edit</Button>
-            </Link>
+            <>
+              <Link href={`/posts/edit/${postDetails.id}`} passHref>
+                <Button variant="secondary" className="order-item-button">Edit</Button>
+              </Link>
+              <Button variant="danger" className="order-item-button" onClick={deleteThisPost}>Delete</Button>
+            </>
           ) : ''}
         </div>
         <div className="post-comments">

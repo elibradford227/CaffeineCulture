@@ -26,8 +26,14 @@ function PostForm({ obj }) {
   }, []);
 
   useEffect(() => {
-    if (obj.id) setFormInput(obj);
+    if (obj.id) {
+      const editObj = obj;
+      editObj.category = obj.category.id;
+      setFormInput(editObj);
+    }
   }, [obj]);
+
+  console.warn(formInput);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,11 +43,21 @@ function PostForm({ obj }) {
     }));
   };
 
+  // eslint-disable-next-line consistent-return
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { ...formInput, uid: user.uid, like_count: 0 };
+
+    // Convert payload category string value to a number for correct typing
+
     payload.category = Number(payload.category);
-    console.warn(payload);
+
+    // Return early with the alert statement to ensure user selects a category
+
+    if (payload.category === 0) {
+      return alert('Please select a category');
+    }
+
     if (obj.id) {
       updatePost(payload).then(() => router.push(`/posts/${obj.id}`));
     } else {
@@ -72,6 +88,7 @@ function PostForm({ obj }) {
           name="content"
           value={formInput.content}
           onChange={handleChange}
+          required
         />
       </FloatingLabel>
 
@@ -81,7 +98,9 @@ function PostForm({ obj }) {
           onChange={handleChange}
           name="category"
           value={formInput.category}
+          required
         >
+          <option>Select A Category</option>
           {categories?.map((category) => (
             (
               <option
