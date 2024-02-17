@@ -31,6 +31,7 @@ export default function SinglePost() {
           <h2>{postDetails.content}</h2>
           <h2>By: {postDetails.user?.username}</h2>
           <h2>Posted On: {postDetails.date}</h2>
+          <h2>{postDetails.category?.name}</h2>
           {user.uid === postDetails.user?.uid ? (
             <Link href={`/posts/edit/${postDetails.id}`} passHref>
               <Button variant="secondary" className="order-item-button">Edit</Button>

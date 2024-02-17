@@ -11,6 +11,7 @@ export default function PostCard({ postObj }) {
         <Card.Title>{postObj.title}</Card.Title>
         <hr />
         <p>{postObj.content}</p>
+        <p>{postObj.category?.name}</p>
         <hr />
         <Link href={`/posts/${postObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>
@@ -25,5 +26,8 @@ PostCard.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     content: PropTypes.string,
+    category: PropTypes.shape({
+      name: PropTypes.string,
+    }),
   }).isRequired,
 };
