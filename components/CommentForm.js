@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
@@ -11,9 +10,10 @@ const initialState = {
   content: '',
 };
 
-function CommentForm({ obj, postId, getPostDetails }) {
+function CommentForm({
+  obj, postId, getPostDetails, onCancelEdit,
+}) {
   const [formInput, setFormInput] = useState(initialState);
-  const router = useRouter();
 
   const { user } = useAuth();
 
@@ -36,7 +36,11 @@ function CommentForm({ obj, postId, getPostDetails }) {
     e.preventDefault();
     const payload = { ...formInput, uid: user.uid, post: postId };
     if (obj.id) {
-      updateComment(payload).then(() => router.push(`/posts/${obj.id}`));
+      payload.id = obj.id;
+      updateComment(payload).then(() => {
+        getPostDetails(postId);
+        onCancelEdit();
+      });
     } else {
       createComment(payload).then(() => getPostDetails(postId));
     }
@@ -57,6 +61,13 @@ function CommentForm({ obj, postId, getPostDetails }) {
           required
         />
       </FloatingLabel>
+      {obj.id
+        ? (
+          <div>
+            <Button onClick={onCancelEdit}>Cancel</Button>
+          </div>
+        )
+        : ''}
 
       <Button type="submit" variant="dark">{obj.id ? 'Update' : 'Create'} Comment</Button>
     </Form>
@@ -72,12 +83,14 @@ CommentForm.propTypes = {
   }),
   postId: PropTypes.number,
   getPostDetails: PropTypes.func,
+  onCancelEdit: PropTypes.func,
 };
 
 CommentForm.defaultProps = {
   obj: initialState,
   postId: 0,
   getPostDetails: null,
+  onCancelEdit: () => {},
 };
 
 export default CommentForm;

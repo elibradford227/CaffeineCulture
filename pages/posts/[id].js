@@ -14,6 +14,15 @@ export default function SinglePost() {
 
   const [postDetails, setPostDetails] = useState([]);
   const [comments, setComments] = useState([]);
+  const [editModeCommentId, setEditModeCommentId] = useState(null);
+
+  const handleEditClick = (commentId) => {
+    setEditModeCommentId(commentId);
+  };
+
+  const handleCancelEdit = () => {
+    setEditModeCommentId(null);
+  };
 
   const deleteThisPost = async () => {
     if (window.confirm('Delete post?')) {
@@ -57,8 +66,15 @@ export default function SinglePost() {
         </div>
         <CommentForm getPostDetails={getPostDetails} postId={postDetails.id} />
         <div className="post-comments">
-          {comments.map((comment) => (
+          {/* {comments.map((comment) => (
             <CommentCard key={comment.id} commentObj={comment} />
+          ))} */}
+          {comments.map((comment) => (
+            editModeCommentId === comment.id ? (
+              <CommentForm key={comment.id} obj={comment} onCancelEdit={handleCancelEdit} getPostDetails={getPostDetails} postId={postDetails.id} />
+            ) : (
+              <CommentCard key={comment.id} commentObj={comment} onEditClick={() => handleEditClick(comment.id)} uid={user.uid} />
+            )
           ))}
         </div>
       </div>
