@@ -7,9 +7,9 @@ export default function Like({ liked }) {
     <>
       <div>
         {liked ? (
-          <Button variant="primary">Like</Button>
-        ) : (
           <Button variant="primary">Unlike</Button>
+        ) : (
+          <Button variant="primary">Like</Button>
         )}
       </div>
     </>

@@ -40,7 +40,7 @@ export default function SinglePost() {
       setPostDetails(res);
       setComments(res.comments);
     });
-  }, [post]);
+  }, [post, user.uid]);
 
   console.warn('loop');
 
