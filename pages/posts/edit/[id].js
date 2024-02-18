@@ -14,7 +14,7 @@ export default function EditOrder() {
 
   useEffect(() => {
     getSinglePost(id, user.uid).then(setEditItem);
-  }, [id]);
+  }, [id, user.uid]);
 
   return (
     <PostForm obj={editItem} />
