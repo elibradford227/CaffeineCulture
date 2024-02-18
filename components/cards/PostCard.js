@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
+import Like from '../Like';
 
 export default function PostCard({ postObj }) {
   return (
@@ -13,9 +14,11 @@ export default function PostCard({ postObj }) {
         <p>{postObj.content}</p>
         <p>{postObj.category?.name}</p>
         <hr />
+        <p>Likes: {postObj.like_count}</p>
         <Link href={`/posts/${postObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>
         </Link>
+        <Like />
       </Card.Body>
     </Card>
   );
@@ -26,6 +29,7 @@ PostCard.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     content: PropTypes.string,
+    like_count: PropTypes.number,
     category: PropTypes.shape({
       name: PropTypes.string,
     }),

@@ -35,7 +35,7 @@ export default function SinglePost() {
   const { user } = useAuth();
 
   const getPostDetails = useCallback(() => {
-    getSinglePost(post).then((res) => {
+    getSinglePost(post, user.uid).then((res) => {
       setPostDetails(res);
       setComments(res.comments);
     });
