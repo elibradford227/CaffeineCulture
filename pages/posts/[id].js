@@ -6,6 +6,7 @@ import { getSinglePost, deletePost } from '../../utils/data/postData';
 import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import CommentForm from '../../components/CommentForm';
+import Like from '../../components/Like';
 
 export default function SinglePost() {
   const router = useRouter();
@@ -35,11 +36,11 @@ export default function SinglePost() {
   const { user } = useAuth();
 
   const getPostDetails = useCallback(() => {
-    getSinglePost(post).then((res) => {
+    getSinglePost(post, user.uid).then((res) => {
       setPostDetails(res);
       setComments(res.comments);
     });
-  }, [post]);
+  }, [post, user.uid]);
 
   console.warn('loop');
 
@@ -56,6 +57,10 @@ export default function SinglePost() {
           <h2>By: {postDetails.user?.username}</h2>
           <h2>Posted On: {postDetails.date}</h2>
           <h2>{postDetails.category?.name}</h2>
+
+          <Like liked={postDetails.liked} />
+
+          {/* Conditionally render edit and delete functionality if the user viewing this post is the author of this post */}
           {user.uid === postDetails.user?.uid ? (
             <>
               <Link href={`/posts/edit/${postDetails.id}`} passHref>
@@ -64,12 +69,13 @@ export default function SinglePost() {
               <Button variant="danger" className="order-item-button" onClick={deleteThisPost}>Delete</Button>
             </>
           ) : ''}
+
         </div>
+        {/* Render comment box for creating a comment */}
         <CommentForm getPostDetails={getPostDetails} postId={postDetails.id} />
+
+        {/* Conditionally render either comment box for updating an existing comment, or the comment itself based upon editModeCommentId useState */}
         <div className="post-comments">
-          {/* {comments.map((comment) => (
-            <CommentCard key={comment.id} commentObj={comment} />
-          ))} */}
           {comments.map((comment) => (
             editModeCommentId === comment.id ? (
               <CommentForm key={comment.id} obj={comment} onCancelEdit={handleCancelEdit} getPostDetails={getPostDetails} postId={postDetails.id} />
@@ -78,6 +84,7 @@ export default function SinglePost() {
             )
           ))}
         </div>
+
       </div>
     </>
   );
