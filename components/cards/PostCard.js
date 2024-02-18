@@ -18,7 +18,7 @@ export default function PostCard({ postObj }) {
         <Link href={`/posts/${postObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>
         </Link>
-        <Like />
+        <Like liked={postObj.liked} />
       </Card.Body>
     </Card>
   );
@@ -33,5 +33,6 @@ PostCard.propTypes = {
     category: PropTypes.shape({
       name: PropTypes.string,
     }),
+    liked: PropTypes.bool,
   }).isRequired,
 };
