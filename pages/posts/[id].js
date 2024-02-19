@@ -42,8 +42,6 @@ export default function SinglePost() {
     });
   }, [post, user.uid]);
 
-  console.warn('loop');
-
   useEffect(() => {
     getPostDetails();
   }, [getPostDetails, change]);
@@ -57,8 +55,7 @@ export default function SinglePost() {
           <h2>By: {postDetails.user?.username}</h2>
           <h2>Posted On: {postDetails.date}</h2>
           <h2>{postDetails.category?.name}</h2>
-
-          <Like liked={postDetails.liked} />
+          <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
 
           {/* Conditionally render edit and delete functionality if the user viewing this post is the author of this post */}
           {user.uid === postDetails.user?.uid ? (

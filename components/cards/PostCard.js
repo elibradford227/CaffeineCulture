@@ -14,11 +14,10 @@ export default function PostCard({ postObj }) {
         <p>{postObj.content}</p>
         <p>{postObj.category?.name}</p>
         <hr />
-        <p>Likes: {postObj.like_count}</p>
         <Link href={`/posts/${postObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>
         </Link>
-        <Like liked={postObj.liked} />
+        <Like postId={postObj.id} liked={postObj.liked} likeCount={(postObj.like_count)} />
       </Card.Body>
     </Card>
   );
