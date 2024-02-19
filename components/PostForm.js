@@ -11,7 +11,7 @@ import getCategories from '../utils/data/categoryData';
 const initialState = {
   title: '',
   content: '',
-  category: 0,
+  category: {},
 };
 
 function PostForm({ obj }) {
