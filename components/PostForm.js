@@ -121,7 +121,10 @@ PostForm.propTypes = {
   obj: PropTypes.shape({
     content: PropTypes.string,
     title: PropTypes.string,
-    category: PropTypes.number,
+    category: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
     id: PropTypes.number,
   }),
 };
