@@ -46,6 +46,8 @@ export default function SinglePost() {
     getPostDetails();
   }, [getPostDetails, change]);
 
+  const timesArray = postDetails?.date?.split('T');
+
   return (
     <>
       <div>
@@ -53,7 +55,8 @@ export default function SinglePost() {
           <h1>{postDetails.title}</h1>
           <h2>{postDetails.content}</h2>
           <h2>By: {postDetails.user?.username}</h2>
-          <h2>Posted On: {postDetails.date}</h2>
+          {timesArray
+            && <h2>Posted On: {timesArray[0]}</h2>}
           <h2>{postDetails.category?.name}</h2>
           <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
 

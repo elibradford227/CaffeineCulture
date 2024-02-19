@@ -10,6 +10,7 @@ export default function PostCard({ postObj }) {
     <Card style={{ width: '20rem', marginLeft: '1.25em' }}>
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
+        <p>By: {postObj.user?.username}</p>
         <hr />
         <p>{postObj.content}</p>
         <p>{postObj.category?.name}</p>
@@ -31,6 +32,9 @@ PostCard.propTypes = {
     like_count: PropTypes.number,
     category: PropTypes.shape({
       name: PropTypes.string,
+    }),
+    user: PropTypes.shape({
+      username: PropTypes.string,
     }),
     liked: PropTypes.bool,
   }).isRequired,
