@@ -21,7 +21,7 @@ export default function CommentCard({
         <Card.Title>{commentObj.title}</Card.Title>
         <hr />
         <p>Posted By: {commentObj.user?.username}</p>
-        <p>content: {commentObj.content}</p>
+        <p>{commentObj.content}</p>
         <hr />
         {/* <Link href={`/posts/${commentObj.id}`} passHref>
           <Button variant="primary" className="">Comments</Button>

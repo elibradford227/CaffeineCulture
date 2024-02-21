@@ -7,7 +7,10 @@ import Like from '../Like';
 
 export default function PostCard({ postObj }) {
   return (
-    <Card style={{ width: '20rem', marginLeft: '1.25em' }}>
+    <Card style={{
+      width: '40rem', marginLeft: '0px', marginBottom: '20px', padding: '10px',
+    }}
+    >
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
         <p>By: {postObj.user?.username}</p>

@@ -24,7 +24,7 @@ function Home() {
         height: '90vh',
         padding: '30px',
         maxWidth: '400px',
-        margin: '0 auto',
+        marginLeft: '10%',
       }}
     >
       {posts.map((post) => (
