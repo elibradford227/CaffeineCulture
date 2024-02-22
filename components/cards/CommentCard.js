@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -15,17 +16,19 @@ export default function CommentCard({
     }
   };
 
+  console.warn(commentObj);
+
   return (
-    <Card style={{ width: '20rem', marginLeft: '1.25em' }} className="CommentCard">
+    <Card className={commentObj.parent !== null ? 'reply-card' : 'comment-card'}>
       <Card.Body>
         <Card.Title>{commentObj.title}</Card.Title>
         <hr />
         <p>Posted By: {commentObj.user?.username}</p>
+        {commentObj.parent !== null ? (
+          <div>@{commentObj.parent?.user?.username}</div>
+        ) : ''}
         <p>{commentObj.content}</p>
         <hr />
-        {/* <Link href={`/posts/${commentObj.id}`} passHref>
-          <Button variant="primary" className="">Comments</Button>
-        </Link> */}
         {uid === commentObj.user?.uid ? (
           <>
             <div>
@@ -36,6 +39,7 @@ export default function CommentCard({
             </div>
           </>
         ) : '' }
+        <Button variant="secondary">Reply</Button>
       </Card.Body>
     </Card>
   );

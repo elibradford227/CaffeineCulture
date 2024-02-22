@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import { getSinglePost, deletePost } from '../../utils/data/postData';
+import { getPostsComments } from '../../utils/data/commentData';
 import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import CommentForm from '../../components/CommentForm';
@@ -38,8 +39,8 @@ export default function SinglePost() {
   const getPostDetails = useCallback(() => {
     getSinglePost(post, user.uid).then((res) => {
       setPostDetails(res);
-      setComments(res.comments);
     });
+    getPostsComments(post).then((res) => setComments(res));
   }, [post, user.uid]);
 
   useEffect(() => {
