@@ -20,3 +20,15 @@ a {
 body {
   background-color: #eeeeee;
 }
+
+.comment-card {
+  margin-left: 1.25em;
+  margin-top: 10px;
+  width: 40rem;
+}
+
+.reply-card {
+  margin-left: 5.25em;
+  margin-top: 10px;
+  width: 36rem;
+}
