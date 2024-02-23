@@ -4,14 +4,14 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
-import { createComment, updateComment } from '../utils/data/commentData';
+import { createComment, updateComment, createReply } from '../utils/data/commentData';
 
 const initialState = {
   content: '',
 };
 
 function CommentForm({
-  obj, postId, getPostDetails, onCancelEdit,
+  obj, postId, getPostDetails, onCancelEdit, replyId, handleForm,
 }) {
   const [formInput, setFormInput] = useState(initialState);
 
@@ -35,20 +35,27 @@ function CommentForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = { ...formInput, uid: user.uid, post: postId };
+    // This if block runs if a comment obj is passed to the form to update the comment
     if (obj.id) {
       payload.id = obj.id;
       updateComment(payload).then(() => {
         getPostDetails(postId);
         onCancelEdit();
       });
+    } else if (replyId) {
+      // This else if block runs if a reply comment id is passed to the form to create a reply to a comment
+      createReply(replyId, payload).then(() => {
+        getPostDetails(postId);
+        handleForm();
+      });
     } else {
+      // If neither a comment obj or reply id is passed to the comment form, we run this else block to create a post comment
       createComment(payload).then(() => getPostDetails(postId));
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      {/* <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Post</h2> */}
 
       <FloatingLabel controlId="floatingInput" label="Comment" className="mb-3">
         <Form.Control
@@ -81,16 +88,20 @@ CommentForm.propTypes = {
     category: PropTypes.number,
     id: PropTypes.number,
   }),
+  replyId: PropTypes.number,
   postId: PropTypes.number,
   getPostDetails: PropTypes.func,
   onCancelEdit: PropTypes.func,
+  handleForm: PropTypes.func,
 };
 
 CommentForm.defaultProps = {
   obj: initialState,
   postId: 0,
+  replyId: 0,
   getPostDetails: null,
   onCancelEdit: () => {},
+  handleForm: () => {},
 };
 
 export default CommentForm;

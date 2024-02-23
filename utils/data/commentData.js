@@ -95,6 +95,19 @@ const createComment = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createReply = (id, payload) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:8000/comments/${id}/create_reply`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getComments,
   getPostsComments,
@@ -102,4 +115,5 @@ export {
   getSingleComment,
   deleteComment,
   updateComment,
+  createReply,
 };
