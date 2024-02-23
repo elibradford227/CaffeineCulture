@@ -81,7 +81,7 @@ export default function SinglePost() {
             editModeCommentId === comment.id ? (
               <CommentForm key={comment.id} obj={comment} onCancelEdit={handleCancelEdit} getPostDetails={getPostDetails} postId={postDetails.id} />
             ) : (
-              <CommentCard key={comment.id} commentObj={comment} onEditClick={() => handleEditClick(comment.id)} uid={user.uid} setChange={setChange} />
+              <CommentCard key={comment.id} commentObj={comment} onEditClick={() => handleEditClick(comment.id)} user={user} setChange={setChange} getPostDetails={getPostDetails} postId={postDetails.id} />
             )
           ))}
         </div>

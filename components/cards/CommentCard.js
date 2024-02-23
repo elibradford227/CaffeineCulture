@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { deleteComment } from '../../utils/data/commentData';
+import CommentForm from '../CommentForm';
 // import Link from 'next/link';
 
 export default function CommentCard({
-  commentObj, onEditClick, uid, setChange,
+  commentObj, onEditClick, user, setChange, getPostDetails, postId,
 }) {
   const deleteThisComment = async () => {
     if (window.confirm('Delete comment?')) {
@@ -16,32 +17,43 @@ export default function CommentCard({
     }
   };
 
+  const [form, setForm] = useState(false);
+
+  const handleForm = () => {
+    setForm((prevState) => !prevState);
+  };
+
   console.warn(commentObj);
 
   return (
-    <Card className={commentObj.parent !== null ? 'reply-card' : 'comment-card'}>
-      <Card.Body>
-        <Card.Title>{commentObj.title}</Card.Title>
-        <hr />
-        <p>Posted By: {commentObj.user?.username}</p>
-        {commentObj.parent !== null ? (
-          <div>@{commentObj.parent?.user?.username}</div>
-        ) : ''}
-        <p>{commentObj.content}</p>
-        <hr />
-        {uid === commentObj.user?.uid ? (
-          <>
-            <div>
-              <Button onClick={onEditClick}>Edit</Button>
-            </div>
-            <div>
-              <Button variant="danger" onClick={deleteThisComment}>Delete</Button>
-            </div>
-          </>
-        ) : '' }
-        <Button variant="secondary">Reply</Button>
-      </Card.Body>
-    </Card>
+    <>
+      <Card className={commentObj.parent !== null ? 'reply-card' : 'comment-card'}>
+        <Card.Body>
+          <Card.Title>{commentObj.title}</Card.Title>
+          <hr />
+          <p>Posted By: {commentObj.user?.username}</p>
+          {commentObj.parent !== null ? (
+            <div>@{commentObj.parent?.user?.username}</div>
+          ) : ''}
+          <p>{commentObj.content}</p>
+          <hr />
+          {user.uid === commentObj.user?.uid ? (
+            <>
+              <div>
+                <Button onClick={onEditClick}>Edit</Button>
+              </div>
+              <div>
+                <Button variant="danger" onClick={deleteThisComment}>Delete</Button>
+              </div>
+            </>
+          ) : '' }
+          <Button variant="secondary" onClick={handleForm}>Reply</Button>
+        </Card.Body>
+        {form ? (
+          <CommentForm replyId={commentObj.id} getPostDetails={getPostDetails} postId={postId} handleForm={handleForm} />
+        ) : ' '}
+      </Card>
+    </>
   );
 }
 
