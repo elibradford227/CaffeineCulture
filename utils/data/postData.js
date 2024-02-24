@@ -17,6 +17,25 @@ const getPosts = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUsersPosts = (uid) => new Promise((resolve, reject) => {
+  fetch('http://localhost:8000/posts/get_user_posts', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const getSinglePost = (post, uid) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/${post}`, {
     method: 'GET',
@@ -80,6 +99,7 @@ const createPost = (payload) => new Promise((resolve, reject) => {
 
 export {
   getPosts,
+  getUsersPosts,
   createPost,
   getSinglePost,
   deletePost,

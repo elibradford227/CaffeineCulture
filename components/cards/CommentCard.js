@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Link from 'next/link';
 import { deleteComment } from '../../utils/data/commentData';
 import CommentForm from '../CommentForm';
-// import Link from 'next/link';
 
 export default function CommentCard({
   commentObj, onEditClick, user, setChange, getPostDetails, postId,
@@ -31,7 +31,9 @@ export default function CommentCard({
         <Card.Body>
           <Card.Title>{commentObj.title}</Card.Title>
           <hr />
-          <p>Posted By: {commentObj.user?.username}</p>
+          <Link passHref href={`/profile/${commentObj.user?.username}`}>
+            <p className="username">{commentObj.user?.username}</p>
+          </Link>
           {commentObj.parent !== null ? (
             <div>@{commentObj.parent?.user?.username}</div>
           ) : ''}

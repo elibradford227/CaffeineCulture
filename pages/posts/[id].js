@@ -55,7 +55,9 @@ export default function SinglePost() {
         <div className="single-post">
           <h1>{postDetails.title}</h1>
           <h2>{postDetails.content}</h2>
-          <h2>By: {postDetails.user?.username}</h2>
+          <Link passHref href={`/profile/${postDetails.user?.username}`}>
+            <h2 className="username">{postDetails.user?.username}</h2>
+          </Link>
           {timesArray
             && <h2>Posted On: {timesArray[0]}</h2>}
           <h2>{postDetails.category?.name}</h2>
