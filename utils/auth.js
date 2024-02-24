@@ -17,6 +17,28 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUserByName = (username) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/get_user_by_name`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve((data));
+      } else {
+        resolve({});
+      }
+    })
+    .catch(reject);
+});
+
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/register`, {
     method: 'POST',
@@ -44,4 +66,5 @@ export {
   signOut,
   checkUser,
   registerUser,
+  getUserByName,
 };

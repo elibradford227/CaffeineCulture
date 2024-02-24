@@ -13,7 +13,9 @@ export default function PostCard({ postObj }) {
     >
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
-        <p>By: {postObj.user?.username}</p>
+        <Link passHref href={`/profile/${postObj.user?.username}`}>
+          <p className="username">{postObj.user?.username}</p>
+        </Link>
         <hr />
         <p>{postObj.content}</p>
         <p>{postObj.category?.name}</p>
