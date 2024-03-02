@@ -6,6 +6,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { getUserByName } from '../../utils/auth';
 import { getConversation } from '../../utils/data/messageData';
 import MessageCard from '../../components/cards/MessageCard';
+import MessageForm from '../../components/MessageForm';
 
 export default function Message() {
   const { user } = useAuth();
@@ -31,7 +32,9 @@ export default function Message() {
   };
 
   useEffect(() => {
-    getChat(user.uid);
+    if (receiver) {
+      getChat(user.uid);
+    }
   }, [user.uid, receiver]);
 
   console.warn(chat);
@@ -42,7 +45,7 @@ export default function Message() {
         <MessageCard key={message.id} mesObj={message} />
       ))}
       </div>
-      <button className="chat-box">hi</button>
+      <MessageForm receiver={receiver} getChat={getChat} />
     </>
   );
 }

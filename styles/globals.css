@@ -41,13 +41,26 @@ body {
   height: 35vh;
 }
 
+.message {
+  background-color: #d8cbcb;
+  padding: 1em;
+  border-radius: 10px;
+  width: 20%;
+}
+
 .user-message {
   margin-left: 80%;
+  margin-top: 10px;
+  background-color: #858080;
+  padding: 1em;
+  border-radius: 10px;
 }
 
 .chat-box {
   position: fixed;
   bottom: 16px;
+  left: 25%;
+  width: 50%;
 }
 
 .username {
