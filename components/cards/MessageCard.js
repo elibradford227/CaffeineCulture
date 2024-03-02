@@ -7,7 +7,7 @@ export default function MessageCard({ mesObj }) {
 
   return (
     <>
-      <div className={user.username === mesObj.sender.username ? 'user-message' : ''}>
+      <div className={user.username === mesObj.sender.username ? 'user-message' : 'message'}>
         {mesObj.sender.username}
         <br />
         {mesObj.content}
