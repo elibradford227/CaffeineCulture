@@ -41,6 +41,15 @@ body {
   height: 35vh;
 }
 
+.user-message {
+  margin-left: 80%;
+}
+
+.chat-box {
+  position: fixed;
+  bottom: 16px;
+}
+
 .username {
   text-decoration: none; 
 
