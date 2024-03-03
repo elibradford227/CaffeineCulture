@@ -7,6 +7,7 @@ import { getUsersPosts } from '../../utils/data/postData';
 import { getUserByName } from '../../utils/auth';
 import { useAuth } from '../../utils/context/authContext';
 import PostCard from '../../components/cards/PostCard';
+import { createConversation } from '../../utils/data/messageData';
 
 export default function Username() {
   const router = useRouter();
@@ -25,6 +26,14 @@ export default function Username() {
     getUsersPosts(uid).then((res) => setPosts(res));
   };
 
+  // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists
+  const handleCreate = () => {
+    const payload = { one_uid: user.id, two_uid: profileUser.uid };
+    createConversation(payload);
+  };
+
+  console.warn(profileUser);
+
   useEffect(() => {
     getUser(username);
     getAllPosts(profileUser.uid);
@@ -38,7 +47,7 @@ export default function Username() {
         <p>{profileUser.bio}</p>
         {user.uid === profileUser.uid ? '' : (
           <Link passHref href={`/messages/${profileUser.username}`}>
-            <Button>Message</Button>
+            <Button onClick={handleCreate}>Message</Button>
           </Link>
         )}
       </div>
