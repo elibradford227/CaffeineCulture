@@ -47,7 +47,7 @@ function MessageForm({ receiver, getChat }) {
       <Button type="submit" variant="dark">Send</Button>
     </Form>
   );
-};
+}
 
 export default MessageForm;
 

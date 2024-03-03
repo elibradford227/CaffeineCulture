@@ -63,6 +63,15 @@ body {
   width: 50%;
 }
 
+.conversation {
+  background-color: #858080;
+  width: 25%;
+  padding: 1em;
+  margin: 10px;
+  border-radius: 10%;
+  border: black 3px solid;
+}
+
 .username {
   text-decoration: none; 
 

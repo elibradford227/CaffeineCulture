@@ -37,24 +37,23 @@ const getConversation = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const getUsersmessages = (uid) => new Promise((resolve, reject) => {
-//   fetch('http://localhost:8000/messages/get_user_messages', {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `${uid}`,
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (data) {
-//         resolve(Object.values(data));
-//       } else {
-//         resolve([]);
-//       }
-//     })
-//     .catch(reject);
-// });
+const getUsersConversations = (id) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:8000/conversations/${id}/get_users_conversations`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
 
 const getSingleMessage = (message, uid) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/messages/${message}`, {
@@ -124,4 +123,5 @@ export {
   getSingleMessage,
   deleteMessage,
   updateMessage,
+  getUsersConversations,
 };
