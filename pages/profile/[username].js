@@ -36,7 +36,9 @@ export default function Username() {
 
   useEffect(() => {
     getUser(username);
-    getAllPosts(profileUser.uid);
+    if (profileUser.uid && username) {
+      getAllPosts(profileUser.uid);
+    }
   }, [profileUser.uid, username]);
 
   return (
