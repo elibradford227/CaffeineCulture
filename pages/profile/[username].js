@@ -29,11 +29,8 @@ export default function Username() {
   // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists
   const handleCreate = () => {
     const payload = { one_uid: user.uid, two_uid: profileUser.uid };
-    console.warn(payload);
     createConversation(payload);
   };
-
-  console.warn(profileUser);
 
   useEffect(() => {
     getUser(username);

@@ -16,8 +16,6 @@ export default function ConversationList() {
     getConversations(user.id);
   }, [user.id]);
 
-  console.warn(conversations);
-
   return (
     <div>{conversations.map((users) => (
       <ConversationCard key={users.id} users={users} />
