@@ -116,6 +116,19 @@ const createMessage = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createConversation = (payload) => new Promise((resolve, reject) => {
+  fetch('http://localhost:8000/conversations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getMessages,
   getConversation,
@@ -124,4 +137,5 @@ export {
   deleteMessage,
   updateMessage,
   getUsersConversations,
+  createConversation,
 };

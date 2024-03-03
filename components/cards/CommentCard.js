@@ -23,8 +23,6 @@ export default function CommentCard({
     setForm((prevState) => !prevState);
   };
 
-  console.warn(commentObj);
-
   return (
     <>
       <Card className={commentObj.parent !== null ? 'reply-card' : 'comment-card'}>

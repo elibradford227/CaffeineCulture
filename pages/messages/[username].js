@@ -20,24 +20,22 @@ export default function Message() {
   const getUser = (name) => {
     getUserByName(name).then((res) => setReceiver(res));
   };
-
-  console.warn(receiver);
   useEffect(() => {
     getUser(username);
   }, [username]);
 
   const getChat = (uid) => {
-    const payload = { sender_uid: uid, receiver_uid: receiver.uid };
-    getConversation(payload).then((res) => setChat(res));
+    if (receiver.uid) {
+      const payload = { sender_uid: uid, receiver_uid: receiver.uid };
+      getConversation(payload).then((res) => setChat(res));
+    }
   };
 
   useEffect(() => {
-    if (receiver) {
+    if (user.uid && receiver) {
       getChat(user.uid);
     }
   }, [user.uid, receiver]);
-
-  console.warn(chat);
 
   return (
     <>
