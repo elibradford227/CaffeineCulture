@@ -41,9 +41,14 @@ export default function Message() {
 
   return (
     <>
-      <div>{chat.map((message) => (
-        <MessageCard key={message.id} mesObj={message} />
-      ))}
+      <div>
+        {chat.length === 0 ? (
+          <h2>No messages to display</h2>
+        ) : (
+          chat.map((message) => (
+            <MessageCard key={message.id} mesObj={message} />
+          ))
+        ) }
       </div>
       <MessageForm receiver={receiver} getChat={getChat} />
     </>
