@@ -39,6 +39,26 @@ const getUserByName = (username) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUserByID = (id) => new Promise((resolve, reject) => {
+  fetch('http://localhost:8000/get_user_by_id', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${id}`,
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(data);
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/register`, {
     method: 'POST',
@@ -67,4 +87,5 @@ export {
   checkUser,
   registerUser,
   getUserByName,
+  getUserByID,
 };

@@ -7,7 +7,7 @@ export default function ConversationCard({ users }) {
     <>
       <div className="conversation">
         <Link passHref href={`/messages/${users.participants[1].username}`}>
-          <h4>{users.participants[1].username}</h4>
+          <h4 className="username">{users.participants[1].username}</h4>
         </Link>
       </div>
     </>

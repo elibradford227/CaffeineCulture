@@ -63,6 +63,19 @@ body {
   width: 50%;
 }
 
+.notification {
+  border: black 3px solid;
+  background-color: rgba(102, 102, 228, 0.349);
+  margin: 5px;
+  padding: 20px;
+}
+
+.read-notification {
+  border: black 3px solid;
+  margin: 5px;
+  padding: 20px;
+}
+
 .conversation {
   background-color: #858080;
   width: 25%;

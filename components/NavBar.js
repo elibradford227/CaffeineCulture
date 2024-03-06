@@ -33,6 +33,9 @@ export default function NavBar({ user }) {
             <Link passHref href="/messages/list">
               <Nav.Link>Messages</Nav.Link>
             </Link>
+            <Link passHref href="/notifications">
+              <Nav.Link>Notifications</Nav.Link>
+            </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
             </Button>
