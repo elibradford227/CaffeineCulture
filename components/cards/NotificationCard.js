@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
+import { markNotificationRead } from '../../utils/data/notificationData';
 
 export default function NotificationCard({ obj }) {
   const [route, setRoute] = useState('');
@@ -19,10 +22,14 @@ export default function NotificationCard({ obj }) {
     }
   }, [obj]);
 
+  const handleClick = () => {
+    markNotificationRead(obj.id);
+  };
+
   return (
     <>
       <Link passHref href={route}>
-        <div className="notification">
+        <div className={!obj.is_read ? 'notification' : 'read-notification'} onClick={handleClick}>
           {obj.content}
           {obj.comment !== null ? (
             <div>
@@ -44,6 +51,8 @@ export default function NotificationCard({ obj }) {
 
 NotificationCard.propTypes = {
   obj: PropTypes.shape({
+    id: PropTypes.number,
+    is_read: PropTypes.bool,
     content: PropTypes.string,
     comment: PropTypes.shape({
       post: PropTypes.number,

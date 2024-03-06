@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import NotificationCard from '../components/cards/NotificationCard';
 import { useAuth } from '../utils/context/authContext';
 import { getUsersNotifications } from '../utils/data/notificationData';
+import NotificationCard from '../components/cards/NotificationCard';
 
 export default function Notifications() {
   const { user } = useAuth();
