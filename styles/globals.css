@@ -63,6 +63,12 @@ body {
   width: 50%;
 }
 
+.notification {
+  border: black 3px solid;
+  margin: 5px;
+  padding: 20px;
+}
+
 .conversation {
   background-color: #858080;
   width: 25%;
