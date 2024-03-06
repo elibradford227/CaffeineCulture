@@ -1,12 +1,12 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
-// import PropTypes from 'prop-types';
 
 export default function NotificationCard({ obj }) {
   const [route, setRoute] = useState('');
 
+  // Defines URL route based upon what type of notification is rendered upon the DOM
   useEffect(() => {
     if (obj.comment) {
       setRoute(`/posts/${obj.comment.post}`);
@@ -14,13 +14,10 @@ export default function NotificationCard({ obj }) {
       setRoute(`/posts/${obj.post.id}`);
     } else {
       getUserByID(obj.message.receiver).then((res) => {
-        console.warn(res);
         setRoute(`/messages/${res.username}`);
       });
     }
   }, [obj]);
-
-  console.warn(obj);
 
   return (
     <>
@@ -44,3 +41,20 @@ export default function NotificationCard({ obj }) {
     </>
   );
 }
+
+NotificationCard.propTypes = {
+  obj: PropTypes.shape({
+    content: PropTypes.string,
+    comment: PropTypes.shape({
+      post: PropTypes.number,
+      content: PropTypes.string,
+    }),
+    post: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    }),
+    message: PropTypes.shape({
+      receiver: PropTypes.number,
+    }),
+  }).isRequired,
+};
