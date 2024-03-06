@@ -17,12 +17,12 @@ export default function Like({ postId, liked, likeCount }) {
 
   const handleCreateLike = async () => {
     try {
-      const payload = { uid: user.uid, post: postId };
-      await createLike(payload);
-
       setHasLiked(true);
 
       setLikes((prevState) => prevState + 1);
+
+      const payload = { uid: user.uid, post: postId };
+      await createLike(payload);
     } catch (error) {
       console.error('Error liking post', error);
     }
@@ -30,12 +30,12 @@ export default function Like({ postId, liked, likeCount }) {
 
   const handleDeleteLike = async () => {
     try {
-      const payload = { uid: user.uid, post: postId };
-      await deleteLike(payload);
-
       setHasLiked(false);
 
       setLikes((prevState) => prevState - 1);
+
+      const payload = { uid: user.uid, post: postId };
+      await deleteLike(payload);
     } catch (error) {
       console.error('Error unliking post', error);
     }

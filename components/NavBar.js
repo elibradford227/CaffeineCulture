@@ -34,7 +34,7 @@ export default function NavBar({ user }) {
               <Nav.Link>Messages</Nav.Link>
             </Link>
             <Link passHref href="/notifications">
-              <Nav.Link>Notifications</Nav.Link>
+              <Nav.Link>Notifications<span className="notif-count">1</span></Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
