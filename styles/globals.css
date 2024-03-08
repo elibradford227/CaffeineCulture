@@ -85,6 +85,17 @@ body {
   border: black 3px solid;
 }
 
+.notif-count {
+  position: relative;
+  top: 30%;
+  right: 10%;
+  transform: translate(50%, 50%);
+  background-color: red; /* You can customize the background color */
+  color: white; /* You can customize the text color */
+  padding: 2px 8px; /* You can adjust the padding for better styling */
+  border-radius: 50%; /* Optional: Makes it a circular badge */
+}
+
 .username {
   text-decoration: none; 
 
