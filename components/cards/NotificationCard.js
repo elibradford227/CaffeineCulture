@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
 import { markNotificationRead } from '../../utils/data/notificationData';
+import { useAuth } from '../../utils/context/authContext';
 
 export default function NotificationCard({ obj }) {
   const [route, setRoute] = useState('');
@@ -23,7 +24,9 @@ export default function NotificationCard({ obj }) {
   }, [obj]);
 
   const handleClick = () => {
-    markNotificationRead(obj.id);
+    if (!obj.is_read) {
+      markNotificationRead(obj.id);
+    }
   };
 
   return (
@@ -64,6 +67,9 @@ NotificationCard.propTypes = {
     }),
     message: PropTypes.shape({
       receiver: PropTypes.number,
+    }),
+    user: PropTypes.shape({
+      uid: PropTypes.string,
     }),
   }).isRequired,
 };

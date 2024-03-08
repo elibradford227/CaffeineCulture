@@ -17,6 +17,25 @@ const getUsersNotifications = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const returnNotificationCount = (uid) => new Promise((resolve, reject) => {
+  fetch('http://localhost:8000/notifications/return_notification_count', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const markNotificationRead = (id) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/notifications/${id}/mark_notification_read`, {
     method: 'PATCH',
@@ -37,4 +56,5 @@ const markNotificationRead = (id) => new Promise((resolve, reject) => {
 export {
   getUsersNotifications,
   markNotificationRead,
+  returnNotificationCount,
 };
