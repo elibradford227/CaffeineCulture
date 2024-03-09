@@ -8,7 +8,7 @@ import Like from '../Like';
 export default function PostCard({ postObj }) {
   return (
     <Card style={{
-      width: '40rem', marginLeft: '0px', marginBottom: '20px', padding: '10px',
+      width: '40rem', marginLeft: '0px', marginBottom: '20px', padding: '10px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     }}
     >
       <Card.Body>
@@ -20,10 +20,12 @@ export default function PostCard({ postObj }) {
         <p>{postObj.content}</p>
         <p>{postObj.category?.name}</p>
         <hr />
-        <Link href={`/posts/${postObj.id}`} passHref>
-          <Button variant="primary" className="">Comments</Button>
-        </Link>
-        <Like postId={postObj.id} liked={postObj.liked} likeCount={(postObj.like_count)} />
+        <div className="post-card-footer">
+          <Like postId={postObj.id} liked={postObj.liked} likeCount={(postObj.like_count)} />
+          <Link href={`/posts/${postObj.id}`} passHref>
+            <Button variant="primary" className="signout-btn">Comments</Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );

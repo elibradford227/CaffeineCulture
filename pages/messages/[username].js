@@ -39,7 +39,7 @@ export default function Message() {
 
   return (
     <>
-      <div>
+      <div className="message-container">
         {chat.length === 0 ? (
           <h2>No messages to display</h2>
         ) : (

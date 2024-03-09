@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
@@ -19,16 +20,23 @@ export default function NavBar({ user }) {
   useEffect(() => {
     const intervalId = setInterval(() => {
       returnNotificationCount(user.uid).then((res) => setCount(res));
-    }, 10000); // 10 seconds
+    }, 10000);
 
     return () => clearInterval(intervalId);
   }, [user.uid]);
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar id="navbar" collapseOnSelect expand="lg">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>Caffeine Culture</Navbar.Brand>
+          <Navbar.Brand>
+            <img
+              src="/navlogo.png"
+              style={{ maxWidth: '160px', maxHeight: '70px' }}
+              id="navLogo"
+              alt=""
+            />{' '}
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -40,16 +48,18 @@ export default function NavBar({ user }) {
             <Link passHref href="/posts/new">
               <Nav.Link>Create Post</Nav.Link>
             </Link>
-            <Link passHref href={`/profile/${user.username}`}>
-              <Nav.Link>Profile</Nav.Link>
-            </Link>
             <Link passHref href="/messages/list">
               <Nav.Link>Messages</Nav.Link>
             </Link>
             <Link passHref href="/notifications">
               <Nav.Link>Notifications {count[0] > 0 ? <span className="notif-count">{count[0]}</span> : '' }</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
+          </Nav>
+          <Nav className="ms-auto">
+            <Link passHref href={`/profile/${user.username}`}>
+              <Nav.Link style={{color: '#77BB3F'}}>Profile</Nav.Link>
+            </Link>
+            <Button className="signout-btn" onClick={signOut}>
               Sign Out
             </Button>
           </Nav>

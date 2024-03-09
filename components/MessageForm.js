@@ -34,7 +34,7 @@ function MessageForm({ receiver, getChat }) {
   return (
     <Form onSubmit={handleSubmit} className="chat-box">
 
-      <FloatingLabel controlId="floatingInput" label="Message" className="mb-3">
+      <FloatingLabel controlId="floatingInput" label="Message" className="mb-2">
         <Form.Control
           as="textarea"
           placeholder="Send Message"
