@@ -51,11 +51,19 @@ function CommentForm({
     } else {
       // If neither a comment obj or reply id is passed to the comment form, we run this else block to create a post comment
       createComment(payload).then(() => getPostDetails(postId));
+      setFormInput(initialState);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress}>
 
       <FloatingLabel controlId="floatingInput" label="Comment" className="mb-3">
         <Form.Control

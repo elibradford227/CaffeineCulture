@@ -74,19 +74,19 @@ export default function SinglePost() {
             {user.uid === postDetails.user?.uid ? (
               <span style={{ fontSize: '2em', marginRight: '10px' }}>
                 <Link href={`/posts/edit/${postDetails.id}`} passHref>
-                  {/* <Button variant="secondary" className="order-item-button">Edit</Button> */}
                   <FontAwesomeIcon icon={faPenToSquare} className="fa-icon" style={{ marginRight: '10px' }} />
                 </Link>
-                {/* <Button variant="danger" className="order-item-button" onClick={deleteThisPost}>Delete</Button> */}
                 <FontAwesomeIcon icon={faTrashCan} className="fa-icon" onClick={deleteThisPost} />
               </span>
             ) : ''}
           </Card.Body>
         </Card>
+
         {/* Render comment box for creating a comment */}
         <CommentForm getPostDetails={getPostDetails} postId={postDetails.id} />
 
         {/* Conditionally render either comment box for updating an existing comment, or the comment itself based upon editModeCommentId useState */}
+
         <div className="post-comments">
           {comments.map((comment) => (
             editModeCommentId === comment.id ? (

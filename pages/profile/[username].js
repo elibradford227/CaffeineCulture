@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { getUsersPosts } from '../../utils/data/postData';
 import { getUserByName } from '../../utils/auth';
 import { useAuth } from '../../utils/context/authContext';
+import Loading from '../../components/Loading';
 import PostCard from '../../components/cards/PostCard';
 import { createConversation } from '../../utils/data/messageData';
 
@@ -21,8 +22,6 @@ export default function Username() {
   const getUser = (name) => {
     getUserByName(name).then((res) => setProfileUser(res));
   };
-
-  console.warn(user);
 
   const getAllPosts = (uid) => {
     getUsersPosts(uid).then((res) => setPosts(res));
@@ -40,6 +39,12 @@ export default function Username() {
       getAllPosts(profileUser.uid);
     }
   }, [profileUser.uid, username]);
+
+  if (posts.length === 0) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <div>

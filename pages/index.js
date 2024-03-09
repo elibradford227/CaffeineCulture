@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getPosts } from '../utils/data/postData';
+import Loading from '../components/Loading';
 import PostCard from '../components/cards/PostCard';
 
 function Home() {
