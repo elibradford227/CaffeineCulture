@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteComment } from '../../utils/data/commentData';
@@ -37,17 +39,24 @@ export default function CommentCard({
           ) : ''}
           <p>{commentObj.content}</p>
           <hr />
-          {user.uid === commentObj.user?.uid ? (
-            <>
-              <div>
-                <Button onClick={onEditClick}>Edit</Button>
-              </div>
-              <div>
-                <Button variant="danger" onClick={deleteThisComment}>Delete</Button>
-              </div>
-            </>
-          ) : '' }
-          <Button variant="secondary" onClick={handleForm}>Reply</Button>
+          <span style={{
+            display: 'flex', alignItems: 'center', gap: '5px', fontSize: '2em',
+          }}
+          >
+            {user.uid === commentObj.user?.uid ? (
+              <>
+                <div>
+                  {/* <Button onClick={onEditClick}>Edit</Button> */}
+                  <FontAwesomeIcon icon={faPenToSquare} className="fa-icon" onClick={onEditClick} style={{ marginRight: '10px' }} />
+                </div>
+                <div>
+                  {/* <Button variant="danger" onClick={deleteThisComment}>Delete</Button> */}
+                  <FontAwesomeIcon icon={faTrashCan} className="fa-icon" onClick={deleteThisComment} style={{ marginRight: '10px' }} />
+                </div>
+              </>
+            ) : '' }
+            <Button className="signout-btn" variant="secondary" onClick={handleForm}>Reply</Button>
+          </span>
         </Card.Body>
         {form ? (
           <CommentForm replyId={commentObj.id} getPostDetails={getPostDetails} postId={postId} handleForm={handleForm} />

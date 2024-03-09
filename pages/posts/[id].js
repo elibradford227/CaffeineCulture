@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Card from 'react-bootstrap/Card';
 import { useRouter } from 'next/router';
-import { Button } from 'react-bootstrap';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getSinglePost, deletePost } from '../../utils/data/postData';
 import { getPostsComments } from '../../utils/data/commentData';
 import CommentCard from '../../components/cards/CommentCard';
@@ -52,28 +54,35 @@ export default function SinglePost() {
   return (
     <>
       <div>
-        <div className="single-post">
-          <h1>{postDetails.title}</h1>
-          <h2>{postDetails.content}</h2>
-          <Link passHref href={`/profile/${postDetails.user?.username}`}>
-            <h2 className="username">{postDetails.user?.username}</h2>
-          </Link>
-          {timesArray
-            && <h2>Posted On: {timesArray[0]}</h2>}
-          <h2>{postDetails.category?.name}</h2>
-          <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
-
-          {/* Conditionally render edit and delete functionality if the user viewing this post is the author of this post */}
-          {user.uid === postDetails.user?.uid ? (
-            <>
-              <Link href={`/posts/edit/${postDetails.id}`} passHref>
-                <Button variant="secondary" className="order-item-button">Edit</Button>
+        <Card className="single-post">
+          <Card.Body>
+            <h1>{postDetails.title}</h1>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <Link passHref href={`/profile/${postDetails.user?.username}`}>
+                <p className="username">{postDetails.user?.username}</p>
               </Link>
-              <Button variant="danger" className="order-item-button" onClick={deleteThisPost}>Delete</Button>
-            </>
-          ) : ''}
+              <p>{postDetails.category?.name}</p>
+              {timesArray
+              && <p>{timesArray[0]}</p>}
+            </span>
+            <hr />
+            <h2>{postDetails.content}</h2>
+            <hr />
+            <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
 
-        </div>
+            {/* Conditionally render edit and delete functionality if the user viewing this post is the author of this post */}
+            {user.uid === postDetails.user?.uid ? (
+              <span style={{ fontSize: '2em', marginRight: '10px' }}>
+                <Link href={`/posts/edit/${postDetails.id}`} passHref>
+                  {/* <Button variant="secondary" className="order-item-button">Edit</Button> */}
+                  <FontAwesomeIcon icon={faPenToSquare} className="fa-icon" style={{ marginRight: '10px' }} />
+                </Link>
+                {/* <Button variant="danger" className="order-item-button" onClick={deleteThisPost}>Delete</Button> */}
+                <FontAwesomeIcon icon={faTrashCan} className="fa-icon" onClick={deleteThisPost} />
+              </span>
+            ) : ''}
+          </Card.Body>
+        </Card>
         {/* Render comment box for creating a comment */}
         <CommentForm getPostDetails={getPostDetails} postId={postDetails.id} />
 

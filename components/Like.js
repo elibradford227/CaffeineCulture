@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import { useAuth } from '../utils/context/authContext';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createLike, deleteLike } from '../utils/data/likeData';
+import { useAuth } from '../utils/context/authContext';
 
 export default function Like({ postId, liked, likeCount }) {
   const [hasLiked, setHasLiked] = useState(liked);
@@ -44,11 +46,11 @@ export default function Like({ postId, liked, likeCount }) {
   return (
     <>
       <div>
-        Likes: {likes}
+        <span style={{ marginRight: '5px' }}>{likes}</span>
         {hasLiked ? (
-          <Button variant="primary" onClick={handleDeleteLike}>Unlike</Button>
+          <FontAwesomeIcon className="fa-icon" icon={solidHeart} onClick={handleDeleteLike} style={{ color: '#77BB3F' }} />
         ) : (
-          <Button variant="primary" onClick={handleCreateLike}>Like</Button>
+          <FontAwesomeIcon icon={regularHeart} onClick={handleCreateLike} />
         )}
       </div>
     </>

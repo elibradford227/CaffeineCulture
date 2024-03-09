@@ -5,7 +5,6 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
 import { markNotificationRead } from '../../utils/data/notificationData';
-import { useAuth } from '../../utils/context/authContext';
 
 export default function NotificationCard({ obj }) {
   const [route, setRoute] = useState('');
