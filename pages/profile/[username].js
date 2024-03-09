@@ -22,8 +22,6 @@ export default function Username() {
     getUserByName(name).then((res) => setProfileUser(res));
   };
 
-  console.warn(user);
-
   const getAllPosts = (uid) => {
     getUsersPosts(uid).then((res) => setPosts(res));
   };

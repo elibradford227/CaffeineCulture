@@ -29,10 +29,18 @@ function MessageForm({ receiver, getChat }) {
     createMessage(payload).then(() => {
       getChat(user.uid);
     });
+    setFormInput(initialState);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="chat-box">
+    <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress} className="chat-box">
 
       <FloatingLabel controlId="floatingInput" label="Message" className="mb-2">
         <Form.Control

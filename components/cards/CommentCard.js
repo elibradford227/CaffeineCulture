@@ -40,7 +40,7 @@ export default function CommentCard({
           <p>{commentObj.content}</p>
           <hr />
           <span style={{
-            display: 'flex', alignItems: 'center', gap: '5px', fontSize: '2em',
+            display: 'flex', alignItems: 'center', gap: '5px', fontSize: '1em',
           }}
           >
             {user.uid === commentObj.user?.uid ? (
@@ -76,7 +76,6 @@ CommentCard.propTypes = {
       uid: PropTypes.string,
     }),
   }).isRequired,
-  uid: PropTypes.string.isRequired,
   onEditClick: PropTypes.func,
   setChange: PropTypes.func.isRequired,
 };

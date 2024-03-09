@@ -57,7 +57,7 @@ export default function NavBar({ user }) {
           </Nav>
           <Nav className="ms-auto">
             <Link passHref href={`/profile/${user.username}`}>
-              <Nav.Link style={{color: '#77BB3F'}}>Profile</Nav.Link>
+              <Nav.Link style={{ color: '#77BB3F' }}>Profile</Nav.Link>
             </Link>
             <Button className="signout-btn" onClick={signOut}>
               Sign Out

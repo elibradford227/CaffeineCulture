@@ -16,7 +16,7 @@ export default function NotificationCard({ obj }) {
     } else if (obj.post) {
       setRoute(`/posts/${obj.post.id}`);
     } else {
-      getUserByID(obj.message.receiver).then((res) => {
+      getUserByID(obj.message.sender).then((res) => {
         setRoute(`/messages/${res.username}`);
       });
     }
@@ -65,7 +65,7 @@ NotificationCard.propTypes = {
       title: PropTypes.string,
     }),
     message: PropTypes.shape({
-      receiver: PropTypes.number,
+      sender: PropTypes.number,
     }),
     user: PropTypes.shape({
       uid: PropTypes.string,
