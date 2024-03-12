@@ -17,7 +17,7 @@ export default function ConversationList() {
   }, [user.id]);
 
   return (
-    <div>{conversations.map((users) => (
+    <div className="conversations-list">{conversations.map((users) => (
       <ConversationCard key={users.id} users={users} />
     ))}
     </div>

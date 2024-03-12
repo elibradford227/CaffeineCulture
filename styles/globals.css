@@ -106,12 +106,32 @@ body {
 }
 
 .conversation {
-  width: 25%;
   padding: 1em;
   margin: 10px;
   border-radius: 10px;
   border: rgba(0, 0, 0, 0.253) 1px solid;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.conversation-current {
+  padding: 1em;
+  margin: 10px;
+  border-radius: 10px;
+  border: rgba(0, 0, 0, 0.253) 1px solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(102, 102, 228, 0.349);
+}
+
+.messages-page {
+  display: flex
+}
+
+.conversations-list {
+  width: 300px;
+}
+
+.message-container {
+  flex: 1;
 }
 
 .notif-count {

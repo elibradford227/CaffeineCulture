@@ -12,10 +12,12 @@ import {
 import PropTypes from 'prop-types';
 // import useNotifsCount from '../utils/useNotifsCount';
 import { signOut } from '../utils/auth';
+import { getUsersLatestMessage } from '../utils/data/messageData';
 import { returnNotificationCount } from '../utils/data/notificationData';
 
 export default function NavBar({ user }) {
   const [count, setCount] = useState(0);
+  const [latestChat, setLatestChat] = useState({});
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -24,6 +26,12 @@ export default function NavBar({ user }) {
 
     return () => clearInterval(intervalId);
   }, [user.uid]);
+
+  useEffect(() => {
+    getUsersLatestMessage(user.uid).then((res) => setLatestChat(res));
+  }, [user.uid]);
+
+  console.warn(latestChat);
 
   return (
     <Navbar id="navbar" collapseOnSelect expand="lg">
@@ -48,7 +56,7 @@ export default function NavBar({ user }) {
             <Link passHref href="/posts/new">
               <Nav.Link>Create Post</Nav.Link>
             </Link>
-            <Link passHref href="/messages/list">
+            <Link passHref href={`/messages/${latestChat.receiver?.username}`}>
               <Nav.Link>Messages</Nav.Link>
             </Link>
             <Link passHref href="/notifications">

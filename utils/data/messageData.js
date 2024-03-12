@@ -68,6 +68,19 @@ const getSingleMessage = (message, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUsersLatestMessage = (uid) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:8000/messages/get_users_latest_message`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 const updateMessage = (payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/messages/${payload.id}`, {
     method: 'PUT',
@@ -138,4 +151,5 @@ export {
   updateMessage,
   getUsersConversations,
   createConversation,
+  getUsersLatestMessage,
 };
