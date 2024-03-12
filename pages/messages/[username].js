@@ -7,6 +7,7 @@ import { getUserByName } from '../../utils/auth';
 import { getConversation } from '../../utils/data/messageData';
 import MessageCard from '../../components/cards/MessageCard';
 import MessageForm from '../../components/MessageForm';
+import ConversationList from './list';
 
 export default function Message() {
   const { user } = useAuth();
@@ -39,16 +40,19 @@ export default function Message() {
 
   return (
     <>
-      <div className="message-container">
-        {chat.length === 0 ? (
-          <h2>No messages to display</h2>
-        ) : (
-          chat.map((message) => (
-            <MessageCard key={message.id} mesObj={message} />
-          ))
-        ) }
+      <div className="messages-page">
+        <ConversationList />
+        <div className="message-container">
+          {chat.length === 0 ? (
+            <h2>No messages to display</h2>
+          ) : (
+            chat.map((message) => (
+              <MessageCard key={message.id} mesObj={message} />
+            ))
+          ) }
+          <MessageForm receiver={receiver} getChat={getChat} />
+        </div>
       </div>
-      <MessageForm receiver={receiver} getChat={getChat} />
     </>
   );
 }

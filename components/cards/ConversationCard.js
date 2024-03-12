@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
+import { useRouter } from 'next/router';
 
 export default function ConversationCard({ users }) {
   const { user } = useAuth();
+  const router = useRouter();
+
+  const { username } = router.query;
+
+  console.warn(username);
 
   let receiver = 'Unknown';
 
@@ -16,9 +22,9 @@ export default function ConversationCard({ users }) {
 
   return (
     <>
-      <div className="conversation">
+      <div className={username === receiver ? 'conversation-current' : 'conversation'}>
         <Link passHref href={`/messages/${receiver}`}>
-          <h4 className="username">{receiver}</h4>
+          <h6 className="username">{receiver}</h6>
         </Link>
       </div>
     </>
