@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useAuth } from '../../utils/context/authContext';
 import { useRouter } from 'next/router';
+import { useAuth } from '../../utils/context/authContext';
 
 export default function ConversationCard({ users }) {
   const { user } = useAuth();

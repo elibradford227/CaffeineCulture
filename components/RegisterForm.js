@@ -17,7 +17,7 @@ function RegisterForm({ user, updateUser }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="register">
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Enter Username</Form.Label>
         <Form.Control as="input" name="username" required placeholder="Enter your username" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
