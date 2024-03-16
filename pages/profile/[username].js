@@ -58,7 +58,14 @@ export default function Username() {
           </Link>
         )}
       </div>
-      <div>
+      <div
+        className="justify-content-center align-content-center"
+        style={{
+          height: '90vh',
+          padding: '20px',
+          maxWidth: '400px',
+        }}
+      >
         {posts.map((post) => (
           <PostCard key={post.id} postObj={post} />
         ))}
