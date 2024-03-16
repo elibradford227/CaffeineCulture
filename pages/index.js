@@ -22,9 +22,8 @@ function Home() {
       className="justify-content-center align-content-center"
       style={{
         height: '90vh',
-        padding: '30px',
+        padding: '20px',
         maxWidth: '400px',
-        marginLeft: '10%',
       }}
     >
       {posts.map((post) => (
