@@ -7,10 +7,7 @@ import Like from '../Like';
 
 export default function PostCard({ postObj }) {
   return (
-    <Card style={{
-      width: '40rem', marginLeft: '0px', marginBottom: '20px', padding: '10px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    }}
-    >
+    <Card className="post-card">
       <Card.Body>
         <Card.Title>{postObj.title}</Card.Title>
         <Link passHref href={`/profile/${postObj.user?.username}`}>
