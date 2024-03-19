@@ -5,9 +5,11 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
 import { markNotificationRead } from '../../utils/data/notificationData';
+import { useNotification } from '../../utils/context/notifContext';
 
 export default function NotificationCard({ obj }) {
   const [route, setRoute] = useState('');
+  const { notificationCount, updateNotificationCount } = useNotification();
 
   // Defines URL route based upon what type of notification is rendered upon the DOM
   useEffect(() => {
@@ -24,6 +26,8 @@ export default function NotificationCard({ obj }) {
 
   const handleClick = () => {
     if (!obj.is_read) {
+      const newCount = notificationCount[0] - 1;
+      updateNotificationCount([newCount]);
       markNotificationRead(obj.id);
     }
   };
