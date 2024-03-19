@@ -14,24 +14,31 @@ import PropTypes from 'prop-types';
 import { signOut } from '../utils/auth';
 import { getUsersLatestMessage } from '../utils/data/messageData';
 import { returnNotificationCount } from '../utils/data/notificationData';
+import { useNotification } from '../utils/context/notifContext';
 
 export default function NavBar({ user }) {
-  const [count, setCount] = useState(0);
   const [latestChat, setLatestChat] = useState({});
+  const { notificationCount, updateNotificationCount } = useNotification();
+
+  // Checks for new notifs on signin
+
+  useEffect(() => {
+    returnNotificationCount(user.uid).then((res) => updateNotificationCount(res));
+  });
+
+  // Check for new notifications every two minutes
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      returnNotificationCount(user.uid).then((res) => setCount(res));
-    }, 10000);
+      returnNotificationCount(user.uid).then((res) => updateNotificationCount(res));
+    }, 120000);
 
     return () => clearInterval(intervalId);
-  }, [user.uid]);
+  }, [user.uid, updateNotificationCount]);
 
   useEffect(() => {
     getUsersLatestMessage(user.uid).then((res) => setLatestChat(res));
   }, [user.uid]);
-
-  console.warn(latestChat);
 
   return (
     <Navbar id="navbar" collapseOnSelect expand="lg">
@@ -60,7 +67,7 @@ export default function NavBar({ user }) {
               <Nav.Link>Messages</Nav.Link>
             </Link>
             <Link passHref href="/notifications">
-              <Nav.Link>Notifications {count[0] > 0 ? <span className="notif-count">{count[0]}</span> : '' }</Nav.Link>
+              <Nav.Link>Notifications {notificationCount[0] > 0 ? <span className="notif-count">{notificationCount[0]}</span> : '' }</Nav.Link>
             </Link>
           </Nav>
           <Nav className="ms-auto">

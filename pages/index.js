@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 // import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 // import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getPosts } from '../utils/data/postData';
 import PostCard from '../components/cards/PostCard';
+import FilterBar from '../components/FilterBar';
 
 function Home() {
   const { user } = useAuth();
@@ -26,6 +28,8 @@ function Home() {
         maxWidth: '400px',
       }}
     >
+      {/* <FilterBar getAllPosts={getAllPosts} /> */}
+
       {posts.map((post) => (
         <PostCard key={post.id} postObj={post} />
       ))}
