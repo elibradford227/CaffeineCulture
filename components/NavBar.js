@@ -1,6 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
@@ -10,7 +9,6 @@ import {
   Button,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-// import useNotifsCount from '../utils/useNotifsCount';
 import { signOut } from '../utils/auth';
 import { getUsersLatestMessage } from '../utils/data/messageData';
 import { returnNotificationCount } from '../utils/data/notificationData';
@@ -24,7 +22,7 @@ export default function NavBar({ user }) {
 
   useEffect(() => {
     returnNotificationCount(user.uid).then((res) => updateNotificationCount(res));
-  });
+  }, [user.uid]);
 
   // Check for new notifications every two minutes
 
