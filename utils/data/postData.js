@@ -36,6 +36,25 @@ const getUsersPosts = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const searchPosts = (search, uid) => new Promise((resolve, reject) => {
+  fetch(`http://localhost:8000/posts/search_posts?search=${search}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const getSinglePost = (post, uid) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/${post}`, {
     method: 'GET',
@@ -104,4 +123,5 @@ export {
   getSinglePost,
   deletePost,
   updatePost,
+  searchPosts,
 };
