@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  api:
+    build: ./CaffeineCulture-server
+    container_name: API
+    ports:
+      - "8000:8000"
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./CaffeineCulture-server:/CaffeineCulture-server
+
+  web:
+    build: ./CaffeineCulture
+    container_name: web
+    ports:
+      - 3000:3000
