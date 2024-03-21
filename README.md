@@ -3,9 +3,10 @@
 ![home](https://github.com/elibradford227/CaffeineCulture/assets/114545170/a8b6eefa-a058-4456-b041-e9bfd2896aa1)
 
 ## Topics
-- [What Is Caffeine Culture?](#what-is-caffeineculture)
+- [What Is Caffeine Culture?](#what-is-caffeine-culture)
 - [Features](#features)
 - [ERD](#erd)
+- [Project Screenshots](#project-screenshots)
 - [Relevant Links](#relevant-links)
 ___
 ## What is Caffeine Culture?
