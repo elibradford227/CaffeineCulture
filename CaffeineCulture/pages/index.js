@@ -38,11 +38,6 @@ function Home() {
   return (
     <div
       className="justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '20px',
-        maxWidth: '400px',
-      }}
     >
       <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress} style={{ padding: '10px' }}>
         <input
