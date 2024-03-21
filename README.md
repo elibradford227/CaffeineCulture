@@ -43,6 +43,9 @@ Finding community doesn't have to be intimidating, and Caffeine Culture makes it
 
 ## ERD
 
+![ERD](https://github.com/elibradford227/CaffeineCultureCapstone/assets/114545170/3a1eb75b-6dea-4e00-a2cc-f858306b587d)
+
+
 ## Project Screenshots 
 
 [Back to List of Topics](#topics)
