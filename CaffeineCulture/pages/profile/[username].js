@@ -61,7 +61,6 @@ export default function Username() {
       <div
         className="justify-content-center align-content-center"
         style={{
-          height: '90vh',
           padding: '20px',
           maxWidth: '400px',
         }}
