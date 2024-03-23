@@ -10,18 +10,19 @@ import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import CommentForm from '../../components/CommentForm';
 import Like from '../../components/Like';
+import { PostData, CommentData } from '../../utils/interfaces';
 
 export default function SinglePost() {
   const router = useRouter();
 
-  const post = router.query.id;
+  const post = router.query.id as string;
 
-  const [postDetails, setPostDetails] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [editModeCommentId, setEditModeCommentId] = useState(null);
-  const [change, setChange] = useState(false);
+  const [postDetails, setPostDetails] = useState<PostData>({} as PostData);
+  const [comments, setComments] = useState<CommentData[]>([]);
+  const [editModeCommentId, setEditModeCommentId] = useState<number | null>(null);
+  const [change, setChange] = useState<boolean>(false);
 
-  const handleEditClick = (commentId) => {
+  const handleEditClick = (commentId: number) => {
     setEditModeCommentId(commentId);
   };
 

@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import Like from '../Like';
+import { PostData } from '../../utils/interfaces';
 
-export default function PostCard({ postObj }) {
+interface Props {
+  postObj: PostData;
+}
+
+export default function PostCard({ postObj }: Props) {
   return (
     <Card className="post-card">
       <Card.Body>
@@ -27,19 +31,3 @@ export default function PostCard({ postObj }) {
     </Card>
   );
 }
-
-PostCard.propTypes = {
-  postObj: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    content: PropTypes.string,
-    like_count: PropTypes.number,
-    category: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    user: PropTypes.shape({
-      username: PropTypes.string,
-    }),
-    liked: PropTypes.bool,
-  }).isRequired,
-};

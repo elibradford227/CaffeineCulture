@@ -9,21 +9,22 @@ import { useAuth } from '../../utils/context/authContext';
 import Loading from '../../components/Loading';
 import PostCard from '../../components/cards/PostCard';
 import { createConversation } from '../../utils/data/messageData';
+import { UserData, PostData } from '../../utils/interfaces';
 
 export default function Username() {
   const router = useRouter();
 
-  const { username } = router.query;
+  const { username } = router.query as { username: string };
   const { user } = useAuth();
 
-  const [posts, setPosts] = useState([]);
-  const [profileUser, setProfileUser] = useState({});
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [profileUser, setProfileUser] = useState<UserData>({} as UserData);
 
-  const getUser = (name) => {
+  const getUser = (name: string) => {
     getUserByName(name).then((res) => setProfileUser(res));
   };
 
-  const getAllPosts = (uid) => {
+  const getAllPosts = (uid: string) => {
     getUsersPosts(uid).then((res) => setPosts(res));
   };
 

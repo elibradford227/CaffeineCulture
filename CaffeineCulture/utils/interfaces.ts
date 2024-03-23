@@ -40,9 +40,33 @@ export interface MessageData {
   receiver: number;
 }
 
+interface NotificationDataComment {
+  id: number;
+  user: number;
+  post: number;
+  content: string;
+  date: string;
+  parent: number;
+}
+
 export interface NotificationData {
   id: number;
   is_read: boolean;
   user: UserData;
-  message: MessageData;
+  message: MessageData | null;
+  post: PostData | null;
+  comment: NotificationDataComment;
+  content: string;
+  date: string;
+}
+
+interface Participant {
+  id: number;
+  username: string;
+  uid: string;
+}
+
+export interface ConversationData {
+  id: number;
+  participants: Participant[]
 }

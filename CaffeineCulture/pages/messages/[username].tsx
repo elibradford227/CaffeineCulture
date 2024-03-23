@@ -8,24 +8,26 @@ import { getConversation } from '../../utils/data/messageData';
 import MessageCard from '../../components/cards/MessageCard';
 import MessageForm from '../../components/MessageForm';
 import ConversationList from './list';
+import { UserData, MessageData } from '../../utils/interfaces';
 
 export default function Message() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const [chat, setChat] = useState([]);
-  const [receiver, setReceiver] = useState({});
+  const [chat, setChat] = useState<MessageData[]>([]);
+  const [receiver, setReceiver] = useState<UserData>({} as UserData);
 
-  const { username } = router.query;
+  const { username } = router.query as { username: string };
 
-  const getUser = (name) => {
+  const getUser = (name: string) => {
     getUserByName(name).then((res) => setReceiver(res));
   };
+
   useEffect(() => {
     getUser(username);
   }, [username]);
 
-  const getChat = (uid) => {
+  const getChat = (uid: string) => {
     if (receiver.uid) {
       const payload = { sender_uid: uid, receiver_uid: receiver.uid };
       getConversation(payload).then((res) => setChat(res));

@@ -16,6 +16,8 @@ export default function Notifications() {
     getNotifications(user.uid);
   }, [user.uid]);
 
+  console.warn(notifications);
+
   return (
     <div>{notifications.map((notif) => (
       <NotificationCard key={notif.id} obj={notif} />

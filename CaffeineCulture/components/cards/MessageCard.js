@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
-
 export default function MessageCard({ mesObj }) {
   const { user } = useAuth();
 
