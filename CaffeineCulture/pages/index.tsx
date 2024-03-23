@@ -4,42 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useAuth } from '../utils/context/authContext';
 import { getPosts, searchPosts } from '../utils/data/postData';
 import PostCard from '../components/cards/PostCard';
-
-interface PostData {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  like_count: number;
-  category: {
-    id: number;
-    name: string;
-  };
-  user: {
-    id: number;
-    username: string;
-    bio: string;
-    join_date: string;
-    uid: string;
-  };
-  comments: CommentData[]; 
-  liked: boolean;
-}
-
-interface CommentData {
-  id: number;
-  user: {
-    id: number;
-    username: string;
-    bio: string;
-    join_date: string;
-    uid: string;
-  };
-  post: PostData;
-  content: string;
-  date: string;
-  parent: CommentData | null;
-}
+import { PostData } from '../utils/interfaces';
 
 function Home() {
   const { user } = useAuth();
