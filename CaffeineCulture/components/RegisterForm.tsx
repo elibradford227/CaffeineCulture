@@ -3,17 +3,24 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { registerUser } from '../utils/auth'; // Update with path to registerUser
+import { UserData } from '../utils/interfaces';
 
-function RegisterForm({ user, updateUser }) {
+interface Props {
+  user: UserData;
+  updateUser: (uid: string) => void;
+}
+
+function RegisterForm({ user, updateUser }: Props) {
   const [formData, setFormData] = useState({
     username: '',
     bio: '',
     uid: user.uid,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    registerUser(formData).then(() => updateUser(user.uid));
+    await registerUser(formData)
+    updateUser(user.uid)
   };
 
   return (

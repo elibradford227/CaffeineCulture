@@ -15,7 +15,8 @@ import { PostData, CommentData } from '../../utils/interfaces';
 export default function SinglePost() {
   const router = useRouter();
 
-  const post = router.query.id as string;
+  const postId = router.query.id;
+  const post: number = parseInt(postId as string, 10);
 
   const [postDetails, setPostDetails] = useState<PostData>({} as PostData);
   const [comments, setComments] = useState<CommentData[]>([]);
@@ -45,7 +46,7 @@ export default function SinglePost() {
       setPostDetails(postDetailsRes);
 
       const commentsRes = await getPostsComments(post);
-      setComments(commentsRes);
+      setComments(commentsRes as CommentData[]);
     } catch (error) {
       console.error('Error fetching post details', error);
     }

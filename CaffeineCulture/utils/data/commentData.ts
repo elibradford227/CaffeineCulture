@@ -1,4 +1,6 @@
-const getComments = (uid) => new Promise((resolve, reject) => {
+import { Payload } from "../../components/CommentForm";
+
+const getComments = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/comments', {
     method: 'GET',
     headers: {
@@ -17,7 +19,7 @@ const getComments = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getPostsComments = (id) => new Promise((resolve, reject) => {
+const getPostsComments = (id: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/comments/${id}/get_single_post_comments`, {
     method: 'GET',
     headers: {
@@ -35,7 +37,7 @@ const getPostsComments = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleComment = (Comment) => new Promise((resolve, reject) => {
+const getSingleComment = (Comment: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/comments/${Comment}`, {
     method: 'GET',
     headers: {
@@ -47,7 +49,7 @@ const getSingleComment = (Comment) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateComment = (payload) => new Promise((resolve, reject) => {
+const updateComment = (payload: Payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/comments/${payload.id}`, {
     method: 'PUT',
     headers: {
@@ -65,7 +67,7 @@ const updateComment = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteComment = (Comment) => new Promise((resolve, reject) => {
+const deleteComment = (Comment: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/comments/${Comment}`, {
     method: 'DELETE',
     headers: {
@@ -82,7 +84,7 @@ const deleteComment = (Comment) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createComment = (payload) => new Promise((resolve, reject) => {
+const createComment = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/comments', {
     method: 'POST',
     headers: {
@@ -95,7 +97,7 @@ const createComment = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createReply = (id, payload) => new Promise((resolve, reject) => {
+const createReply = (id: number, payload: Payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/comments/${id}/create_reply`, {
     method: 'POST',
     headers: {
