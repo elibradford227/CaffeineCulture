@@ -5,7 +5,12 @@ import Signin from '../components/Signin';
 import NavBar from '../components/NavBar';
 import RegisterForm from '../components/RegisterForm';
 
-const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
+interface Props {
+  component: React.ComponentType<any>;
+  pageProps: Record<string, any>;
+}
+
+const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }: Props) => {
   const { user, userLoading, updateUser } = useAuth();
 
   // if user state is null, then show loader
@@ -27,8 +32,3 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
 };
 
 export default ViewDirectorBasedOnUserAuthStatus;
-
-ViewDirectorBasedOnUserAuthStatus.propTypes = {
-  component: PropTypes.func.isRequired,
-  pageProps: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};
