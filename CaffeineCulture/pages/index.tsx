@@ -11,8 +11,9 @@ function Home() {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const getAllPosts = (uid: string) => {
-    getPosts(uid).then((res) => setPosts(res));
+  const getAllPosts = async (uid: string) => {
+    const res = await getPosts(uid);
+    setPosts(res);
   };
 
   useEffect(() => {
@@ -23,9 +24,10 @@ function Home() {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    searchPosts(searchTerm, user.uid).then((res) => setPosts(res));
+    const res = await searchPosts(searchTerm, user.uid);
+    setPosts(res);
     setSearchTerm('');
   };
 

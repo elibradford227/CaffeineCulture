@@ -19,18 +19,20 @@ export default function Message() {
 
   const { username } = router.query as { username: string };
 
-  const getUser = (name: string) => {
-    getUserByName(name).then((res) => setReceiver(res));
+  const getUser = async (name: string) => {
+    const res = await getUserByName(name);
+    setReceiver(res);
   };
 
   useEffect(() => {
     getUser(username);
   }, [username]);
 
-  const getChat = (uid: string) => {
+  const getChat = async (uid: string) => {
     if (receiver.uid) {
       const payload = { sender_uid: uid, receiver_uid: receiver.uid };
-      getConversation(payload).then((res) => setChat(res));
+      const res = await getConversation(payload);
+      setChat(res)
     }
   };
 

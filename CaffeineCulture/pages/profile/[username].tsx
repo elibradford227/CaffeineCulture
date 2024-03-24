@@ -20,18 +20,20 @@ export default function Username() {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [profileUser, setProfileUser] = useState<UserData>({} as UserData);
 
-  const getUser = (name: string) => {
-    getUserByName(name).then((res) => setProfileUser(res));
+  const getUser = async (name: string) => {
+    const res = await getUserByName(name);
+    setProfileUser(res);
   };
 
-  const getAllPosts = (uid: string) => {
-    getUsersPosts(uid).then((res) => setPosts(res));
+  const getAllPosts = async (uid: string) => {
+    const res = await getUsersPosts(uid);
+    setPosts(res);
   };
 
   // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const payload = { one_uid: user.uid, two_uid: profileUser.uid };
-    createConversation(payload);
+    await createConversation(payload);
   };
 
   useEffect(() => {
@@ -50,7 +52,6 @@ export default function Username() {
   return (
     <div>
       <div id="profile">
-        {/* <img alt="" src={user.fbUser.photoURL} id="profilePhoto" /> */}
         <h1>{profileUser.username}</h1>
         <p>{profileUser.bio}</p>
         {user.uid === profileUser.uid ? '' : (

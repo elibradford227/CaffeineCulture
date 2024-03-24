@@ -8,8 +8,9 @@ export default function ConversationList() {
   const { user } = useAuth();
   const [conversations, setConversations] = useState<ConversationData[]>([]);
 
-  const getConversations = (id: string) => {
-    getUsersConversations(id).then((res) => setConversations(res));
+  const getConversations = async (id: string) => {
+    const res = await getUsersConversations(id);
+    setConversations(res);
   };
 
   useEffect(() => {

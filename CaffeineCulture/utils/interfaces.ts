@@ -31,8 +31,16 @@ export interface CategoryData {
   id: number;
   name: string;
 }
-
 export interface MessageData {
+  id: number;
+  sender: UserData;
+  receiver: UserData;
+  content: string;
+  uid: string;
+  date: string;
+}
+
+interface NotificationMessageData {
   id: number;
   content: string;
   date: string;
@@ -53,7 +61,7 @@ export interface NotificationData {
   id: number;
   is_read: boolean;
   user: UserData;
-  message: MessageData | null;
+  message: NotificationMessageData | null;
   post: PostData | null;
   comment: NotificationDataComment;
   content: string;

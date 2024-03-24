@@ -39,12 +39,17 @@ export default function SinglePost() {
 
   const { user } = useAuth();
 
-  const getPostDetails = useCallback(() => {
-    getSinglePost(post, user.uid).then((res) => {
-      setPostDetails(res);
-    });
-    getPostsComments(post).then((res) => setComments(res));
-  }, [post, user.uid]);
+  const getPostDetails = useCallback(async () => {
+    try {
+      const postDetailsRes = await getSinglePost(post, user.uid);
+      setPostDetails(postDetailsRes);
+
+      const commentsRes = await getPostsComments(post);
+      setComments(commentsRes);
+    } catch (error) {
+      console.error('Error fetching post details', error);
+    }
+  }, [post, user.uid])
 
   useEffect(() => {
     getPostDetails();

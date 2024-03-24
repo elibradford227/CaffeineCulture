@@ -8,8 +8,9 @@ export default function Notifications() {
   const { user } = useAuth();
   const [notifications, setNotifications] = useState<NotificationData[]>([]);
 
-  const getNotifications = (uid: string) => {
-    getUsersNotifications(uid).then((res) => setNotifications(res));
+  const getNotifications = async (uid: string) => {
+    const res = await getUsersNotifications(uid);
+    setNotifications(res)
   };
 
   useEffect(() => {

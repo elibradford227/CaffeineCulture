@@ -1,7 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
-export default function MessageCard({ mesObj }) {
+import { UserData } from '../../utils/interfaces';
+import { MessageData } from '../../utils/interfaces';
+
+interface Props {
+  mesObj: MessageData;
+}
+
+export default function MessageCard({ mesObj }: Props) {
   const { user } = useAuth();
 
   return (
@@ -14,12 +20,3 @@ export default function MessageCard({ mesObj }) {
     </>
   );
 }
-
-MessageCard.propTypes = {
-  mesObj: PropTypes.shape({
-    content: PropTypes.string,
-    sender: PropTypes.shape({
-      username: PropTypes.string,
-    }),
-  }).isRequired,
-};
