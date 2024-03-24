@@ -1,4 +1,6 @@
-const getMessages = (uid) => new Promise((resolve, reject) => {
+import { Payload } from "../../components/MessageForm";
+
+const getMessages = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/messages', {
     method: 'GET',
     headers: {
@@ -17,7 +19,7 @@ const getMessages = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getConversation = (payload) => new Promise((resolve, reject) => {
+const getConversation = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/messages/get_conversation', {
     method: 'POST',
     headers: {
@@ -37,7 +39,7 @@ const getConversation = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUsersConversations = (id) => new Promise((resolve, reject) => {
+const getUsersConversations = (id: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/conversations/${id}/get_users_conversations`, {
     method: 'GET',
     headers: {
@@ -55,7 +57,7 @@ const getUsersConversations = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleMessage = (message, uid) => new Promise((resolve, reject) => {
+const getSingleMessage = (message: number, uid: string) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/messages/${message}`, {
     method: 'GET',
     headers: {
@@ -68,7 +70,7 @@ const getSingleMessage = (message, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUsersLatestMessage = (uid) => new Promise((resolve, reject) => {
+const getUsersLatestMessage = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/messages/get_users_latest_message', {
     method: 'GET',
     headers: {
@@ -81,7 +83,7 @@ const getUsersLatestMessage = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateMessage = (payload) => new Promise((resolve, reject) => {
+const updateMessage = (payload: Payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/messages/${payload.id}`, {
     method: 'PUT',
     headers: {
@@ -99,7 +101,7 @@ const updateMessage = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteMessage = (message) => new Promise((resolve, reject) => {
+const deleteMessage = (message: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/messages/${message}`, {
     method: 'DELETE',
     headers: {
@@ -116,7 +118,7 @@ const deleteMessage = (message) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createMessage = (payload) => new Promise((resolve, reject) => {
+const createMessage = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/messages', {
     method: 'POST',
     headers: {
@@ -129,7 +131,7 @@ const createMessage = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createConversation = (payload) => new Promise((resolve, reject) => {
+const createConversation = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/conversations', {
     method: 'POST',
     headers: {

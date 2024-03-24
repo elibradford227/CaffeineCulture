@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
@@ -21,7 +20,9 @@ const initialState: initialState = {
   category: 0,
 };
 
-interface Payload {
+export interface Payload {
+  id?: number;
+  content: string;
   uid: string;
   like_count: number;
   category?: number;
@@ -43,7 +44,7 @@ function PostForm({ obj }) {
   }, []);
 
   useEffect(() => {
-    if (obj.id) {
+    if (obj?.id) {
       const editObj = obj;
       editObj.category = obj.category.id;
       setFormInput(editObj);
@@ -73,12 +74,10 @@ function PostForm({ obj }) {
       return alert('Please select a category');
     }
 
-    if (obj.id) {
-      // updatePost(payload).then(() => router.push(`/posts/${obj.id}`));
+    if (obj?.id) {
       await updatePost(payload)
       router.push(`/posts/${obj.id}`)
     } else {
-      // createPost(payload).then(router.push('/'));
       await createPost(payload)
       router.push('/');
     }
@@ -86,7 +85,7 @@ function PostForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.id ? 'Update' : 'Create'} Post</h2>
+      <h2 className="text-white mt-5">{obj?.id ? 'Update' : 'Create'} Post</h2>
 
       <FloatingLabel controlId="floatingInput1" label="Post Title" className="mb-3">
         <Form.Control
@@ -133,25 +132,9 @@ function PostForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      <Button type="submit" variant="dark">{obj.id ? 'Update' : 'Create'} Post</Button>
+      <Button type="submit" variant="dark">{obj?.id ? 'Update' : 'Create'} Post</Button>
     </Form>
   );
 }
-
-PostForm.propTypes = {
-  obj: PropTypes.shape({
-    content: PropTypes.string,
-    title: PropTypes.string,
-    category: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-    id: PropTypes.number,
-  }),
-};
-
-PostForm.defaultProps = {
-  obj: initialState,
-};
 
 export default PostForm;

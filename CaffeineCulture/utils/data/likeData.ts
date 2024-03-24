@@ -1,4 +1,6 @@
-const getLikes = (uid) => new Promise((resolve, reject) => {
+import { Payload } from "../../components/Like";
+
+const getLikes = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/likes', {
     method: 'GET',
     headers: {
@@ -17,7 +19,7 @@ const getLikes = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleLike = (Like) => new Promise((resolve, reject) => {
+const getSingleLike = (Like: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/likes/${Like}`, {
     method: 'GET',
     headers: {
@@ -47,7 +49,7 @@ const updateLike = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteLike = (payload) => new Promise((resolve, reject) => {
+const deleteLike = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/likes/delete_like', {
     method: 'DELETE',
     headers: {
@@ -65,7 +67,7 @@ const deleteLike = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createLike = (payload) => new Promise((resolve, reject) => {
+const createLike = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/likes', {
     method: 'POST',
     headers: {

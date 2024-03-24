@@ -2,7 +2,12 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { clientCredentials } from './client';
 
-const checkUser = (uid) => new Promise((resolve, reject) => {
+interface UserInfo {
+  bio: string;
+  username: string;
+}
+
+const checkUser = (uid: string) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/checkuser`, {
     method: 'POST',
     body: JSON.stringify({
@@ -17,7 +22,7 @@ const checkUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUserByName = (username) => new Promise((resolve, reject) => {
+const getUserByName = (username: string) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/get_user_by_name`, {
     method: 'POST',
     headers: {
@@ -39,7 +44,7 @@ const getUserByName = (username) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUserByID = (id) => new Promise((resolve, reject) => {
+const getUserByID = (id: number) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/get_user_by_id', {
     method: 'POST',
     headers: {
@@ -59,7 +64,7 @@ const getUserByID = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const registerUser = (userInfo) => new Promise((resolve, reject) => {
+const registerUser = (userInfo: UserInfo) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/register`, {
     method: 'POST',
     body: JSON.stringify(userInfo),
