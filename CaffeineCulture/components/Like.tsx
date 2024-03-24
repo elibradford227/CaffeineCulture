@@ -12,7 +12,7 @@ interface Props {
   likeCount: number;
 }
 
-interface Payload {
+export interface Payload {
   uid: string;
   post: number;
 }

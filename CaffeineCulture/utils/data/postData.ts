@@ -1,4 +1,6 @@
-const getPosts = (uid) => new Promise((resolve, reject) => {
+import { Payload } from "../../components/PostForm";
+
+const getPosts = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/posts', {
     method: 'GET',
     headers: {
@@ -17,7 +19,7 @@ const getPosts = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUsersPosts = (uid) => new Promise((resolve, reject) => {
+const getUsersPosts = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/posts/get_user_posts', {
     method: 'GET',
     headers: {
@@ -36,7 +38,7 @@ const getUsersPosts = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const searchPosts = (search, uid) => new Promise((resolve, reject) => {
+const searchPosts = (search: string, uid: string) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/search_posts?search=${search}`, {
     method: 'GET',
     headers: {
@@ -55,7 +57,7 @@ const searchPosts = (search, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSinglePost = (post, uid) => new Promise((resolve, reject) => {
+const getSinglePost = (post: number, uid: string) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/${post}`, {
     method: 'GET',
     headers: {
@@ -68,7 +70,7 @@ const getSinglePost = (post, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updatePost = (payload) => new Promise((resolve, reject) => {
+const updatePost = (payload: Payload) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/${payload.id}`, {
     method: 'PUT',
     headers: {
@@ -86,7 +88,7 @@ const updatePost = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deletePost = (Post) => new Promise((resolve, reject) => {
+const deletePost = (Post: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/posts/${Post}`, {
     method: 'DELETE',
     headers: {
@@ -103,7 +105,7 @@ const deletePost = (Post) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createPost = (payload) => new Promise((resolve, reject) => {
+const createPost = (payload: Payload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/posts', {
     method: 'POST',
     headers: {

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -8,34 +7,47 @@ import {
   Nav,
   Button,
 } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import { signOut } from '../utils/auth';
 import { getUsersLatestMessage } from '../utils/data/messageData';
 import { returnNotificationCount } from '../utils/data/notificationData';
 import { useNotification } from '../utils/context/notifContext';
+import { UserData, MessageData } from '../utils/interfaces';
 
-export default function NavBar({ user }) {
-  const [latestChat, setLatestChat] = useState({});
+interface Props {
+  user: UserData;
+}
+
+export default function NavBar({ user }: Props) {
+  const [latestChat, setLatestChat] = useState<MessageData>({} as MessageData);
   const { notificationCount, updateNotificationCount } = useNotification();
 
   // Checks for new notifs on signin
 
   useEffect(() => {
-    returnNotificationCount(user.uid).then((res) => updateNotificationCount(res));
+    const getCount = async () => {
+      const res = await returnNotificationCount(user.uid);
+      updateNotificationCount(res as number);
+    }
+    getCount();
   }, [user.uid]);
 
   // Check for new notifications every two minutes
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      returnNotificationCount(user.uid).then((res) => updateNotificationCount(res));
+    const intervalId = setInterval(async () => {
+      const res = await returnNotificationCount(user.uid);
+      updateNotificationCount(res as number);
     }, 120000);
 
     return () => clearInterval(intervalId);
   }, [user.uid, updateNotificationCount]);
 
   useEffect(() => {
-    getUsersLatestMessage(user.uid).then((res) => setLatestChat(res));
+    const getMessage = async () => {
+      const res = await getUsersLatestMessage(user.uid);
+      setLatestChat(res as MessageData);
+    }
+    getMessage();
   }, [user.uid]);
 
   return (
@@ -81,10 +93,3 @@ export default function NavBar({ user }) {
     </Navbar>
   );
 }
-
-NavBar.propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string,
-    uid: PropTypes.string,
-  }).isRequired,
-};

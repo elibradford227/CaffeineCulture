@@ -19,7 +19,8 @@ interface Props {
   getChat: (uid: string) => void;
 }
 
-interface Payload {
+export interface Payload {
+  id?: number;
   sender_uid: string;
   receiver_uid: string;
 }

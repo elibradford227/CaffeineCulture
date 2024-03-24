@@ -1,4 +1,4 @@
-const getUsersNotifications = (uid) => new Promise((resolve, reject) => {
+const getUsersNotifications = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/notifications/get_users_notifications', {
     method: 'GET',
     headers: {
@@ -17,7 +17,7 @@ const getUsersNotifications = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const returnNotificationCount = (uid) => new Promise((resolve, reject) => {
+const returnNotificationCount = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/notifications/return_notification_count', {
     method: 'GET',
     headers: {
@@ -36,7 +36,7 @@ const returnNotificationCount = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const markNotificationRead = (id) => new Promise((resolve, reject) => {
+const markNotificationRead = (id: number) => new Promise((resolve, reject) => {
   fetch(`http://localhost:8000/notifications/${id}/mark_notification_read`, {
     method: 'PATCH',
     headers: {
