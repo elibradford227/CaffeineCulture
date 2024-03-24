@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../utils/context/authContext';
-// import ConversationCard from '../../components/cards/ConversationCard';
 import { getUsersConversations } from '../../utils/data/messageData';
 import ConversationCard from '../../components/cards/ConversationCard';
+import { ConversationData } from '../../utils/interfaces';
 
 export default function ConversationList() {
   const { user } = useAuth();
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState<ConversationData[]>([]);
 
-  const getConversations = (id) => {
-    getUsersConversations(id).then((res) => setConversations(res));
+  const getConversations = async (id: string) => {
+    const res = await getUsersConversations(id);
+    setConversations(res);
   };
 
   useEffect(() => {

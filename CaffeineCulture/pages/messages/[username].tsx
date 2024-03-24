@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
@@ -8,27 +6,31 @@ import { getConversation } from '../../utils/data/messageData';
 import MessageCard from '../../components/cards/MessageCard';
 import MessageForm from '../../components/MessageForm';
 import ConversationList from './list';
+import { UserData, MessageData } from '../../utils/interfaces';
 
 export default function Message() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const [chat, setChat] = useState([]);
-  const [receiver, setReceiver] = useState({});
+  const [chat, setChat] = useState<MessageData[]>([]);
+  const [receiver, setReceiver] = useState<UserData>({} as UserData);
 
-  const { username } = router.query;
+  const { username } = router.query as { username: string };
 
-  const getUser = (name) => {
-    getUserByName(name).then((res) => setReceiver(res));
+  const getUser = async (name: string) => {
+    const res = await getUserByName(name);
+    setReceiver(res);
   };
+
   useEffect(() => {
     getUser(username);
   }, [username]);
 
-  const getChat = (uid) => {
+  const getChat = async (uid: string) => {
     if (receiver.uid) {
       const payload = { sender_uid: uid, receiver_uid: receiver.uid };
-      getConversation(payload).then((res) => setChat(res));
+      const res = await getConversation(payload);
+      setChat(res)
     }
   };
 

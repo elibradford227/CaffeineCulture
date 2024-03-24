@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['next', 'next/core-web-vitals', 'prettier', 'airbnb'],
+  extends: ['next/babel', 'next/core-web-vitals', 'prettier', 'airbnb'],
   env: {
     browser: true,
     es2021: true,
@@ -20,7 +20,7 @@ module.exports = {
     'react/jsx-filename-extension': [
       1,
       {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.tsx'],
       },
     ],
     'react/jsx-one-expression-per-line': [0],

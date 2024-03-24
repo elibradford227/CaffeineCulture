@@ -10,18 +10,19 @@ import CommentCard from '../../components/cards/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import CommentForm from '../../components/CommentForm';
 import Like from '../../components/Like';
+import { PostData, CommentData } from '../../utils/interfaces';
 
 export default function SinglePost() {
   const router = useRouter();
 
-  const post = router.query.id;
+  const post = router.query.id as string;
 
-  const [postDetails, setPostDetails] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [editModeCommentId, setEditModeCommentId] = useState(null);
-  const [change, setChange] = useState(false);
+  const [postDetails, setPostDetails] = useState<PostData>({} as PostData);
+  const [comments, setComments] = useState<CommentData[]>([]);
+  const [editModeCommentId, setEditModeCommentId] = useState<number | null>(null);
+  const [change, setChange] = useState<boolean>(false);
 
-  const handleEditClick = (commentId) => {
+  const handleEditClick = (commentId: number) => {
     setEditModeCommentId(commentId);
   };
 
@@ -38,12 +39,17 @@ export default function SinglePost() {
 
   const { user } = useAuth();
 
-  const getPostDetails = useCallback(() => {
-    getSinglePost(post, user.uid).then((res) => {
-      setPostDetails(res);
-    });
-    getPostsComments(post).then((res) => setComments(res));
-  }, [post, user.uid]);
+  const getPostDetails = useCallback(async () => {
+    try {
+      const postDetailsRes = await getSinglePost(post, user.uid);
+      setPostDetails(postDetailsRes);
+
+      const commentsRes = await getPostsComments(post);
+      setComments(commentsRes);
+    } catch (error) {
+      console.error('Error fetching post details', error);
+    }
+  }, [post, user.uid])
 
   useEffect(() => {
     getPostDetails();

@@ -9,28 +9,31 @@ import { useAuth } from '../../utils/context/authContext';
 import Loading from '../../components/Loading';
 import PostCard from '../../components/cards/PostCard';
 import { createConversation } from '../../utils/data/messageData';
+import { UserData, PostData } from '../../utils/interfaces';
 
 export default function Username() {
   const router = useRouter();
 
-  const { username } = router.query;
+  const { username } = router.query as { username: string };
   const { user } = useAuth();
 
-  const [posts, setPosts] = useState([]);
-  const [profileUser, setProfileUser] = useState({});
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [profileUser, setProfileUser] = useState<UserData>({} as UserData);
 
-  const getUser = (name) => {
-    getUserByName(name).then((res) => setProfileUser(res));
+  const getUser = async (name: string) => {
+    const res = await getUserByName(name);
+    setProfileUser(res);
   };
 
-  const getAllPosts = (uid) => {
-    getUsersPosts(uid).then((res) => setPosts(res));
+  const getAllPosts = async (uid: string) => {
+    const res = await getUsersPosts(uid);
+    setPosts(res);
   };
 
   // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const payload = { one_uid: user.uid, two_uid: profileUser.uid };
-    createConversation(payload);
+    await createConversation(payload);
   };
 
   useEffect(() => {
@@ -49,7 +52,6 @@ export default function Username() {
   return (
     <div>
       <div id="profile">
-        {/* <img alt="" src={user.fbUser.photoURL} id="profilePhoto" /> */}
         <h1>{profileUser.username}</h1>
         <p>{profileUser.bio}</p>
         {user.uid === profileUser.uid ? '' : (

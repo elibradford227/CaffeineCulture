@@ -1,45 +1,41 @@
 import { Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../utils/context/authContext';
 import { getPosts, searchPosts } from '../utils/data/postData';
 import PostCard from '../components/cards/PostCard';
+import { PostData } from '../utils/interfaces';
 
 function Home() {
   const { user } = useAuth();
-  const [posts, setPosts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const getAllPosts = (uid) => {
-    getPosts(uid).then((res) => setPosts(res));
+  const getAllPosts = async (uid: string) => {
+    const res = await getPosts(uid);
+    setPosts(res);
   };
 
   useEffect(() => {
     getAllPosts(user.uid);
   }, [user.uid]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    searchPosts(searchTerm, user.uid).then((res) => setPosts(res));
+    const res = await searchPosts(searchTerm, user.uid);
+    setPosts(res);
     setSearchTerm('');
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(e);
-    }
   };
 
   return (
     <div
       className="justify-content-center align-content-center"
     >
-      <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress} style={{ padding: '10px' }}>
+      <Form onSubmit={handleSubmit}  style={{ padding: '10px' }}>
         <input
           type="text"
           placeholder="Search Posts"
