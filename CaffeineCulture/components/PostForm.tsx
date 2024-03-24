@@ -7,22 +7,39 @@ import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createPost, updatePost } from '../utils/data/postData';
 import getCategories from '../utils/data/categoryData';
+import { CategoryData } from '../utils/interfaces';
 
-const initialState = {
+interface initialState {
+  title: string;
+  content: string;
+  category: number;
+}
+
+const initialState: initialState = {
   title: '',
   content: '',
-  category: {},
+  category: 0,
 };
 
+interface Payload {
+  uid: string;
+  like_count: number;
+  category?: number;
+}
+
 function PostForm({ obj }) {
-  const [formInput, setFormInput] = useState(initialState);
-  const [categories, setCategories] = useState([]);
+  const [formInput, setFormInput] = useState<initialState>(initialState);
+  const [categories, setCategories] = useState<CategoryData[]>([]);
   const router = useRouter();
 
   const { user } = useAuth();
 
   useEffect(() => {
-    getCategories().then((res) => setCategories(res));
+    const retrieveCategories = async () => {
+      const res = await getCategories();
+      setCategories(res as CategoryData[]);
+    }
+    retrieveCategories();
   }, []);
 
   useEffect(() => {
@@ -42,24 +59,28 @@ function PostForm({ obj }) {
   };
 
   // eslint-disable-next-line consistent-return
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...formInput, uid: user.uid, like_count: 0 };
+    const payload: Payload = { ...formInput, uid: user.uid, like_count: 0 };
 
     // Convert payload category string value to a number for correct typing
 
     payload.category = Number(payload.category);
 
-    // Return early with the alert statement to ensure user selects a category
+    // // Return early with the alert statement to ensure user selects a category
 
     if (payload.category === 0) {
       return alert('Please select a category');
     }
 
     if (obj.id) {
-      updatePost(payload).then(() => router.push(`/posts/${obj.id}`));
+      // updatePost(payload).then(() => router.push(`/posts/${obj.id}`));
+      await updatePost(payload)
+      router.push(`/posts/${obj.id}`)
     } else {
-      createPost(payload).then(router.push('/'));
+      // createPost(payload).then(router.push('/'));
+      await createPost(payload)
+      router.push('/');
     }
   };
 
@@ -98,7 +119,7 @@ function PostForm({ obj }) {
           value={formInput.category}
           required
         >
-          <option>Select A Category</option>
+          <option key={0} value={0}>Select A Category</option>
           {categories?.map((category) => (
             (
               <option

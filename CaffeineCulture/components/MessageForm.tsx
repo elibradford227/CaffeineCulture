@@ -1,21 +1,35 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createMessage } from '../utils/data/messageData';
+import { UserData } from '../utils/interfaces';
 
-const initialState = {
+interface initialState {
+  content: string;
+}
+
+const initialState: initialState = {
   content: '',
 };
 
-function MessageForm({ receiver, getChat }) {
-  const [formInput, setFormInput] = useState(initialState);
+interface Props {
+  receiver: UserData;
+  getChat: (uid: string) => void;
+}
+
+interface Payload {
+  sender_uid: string;
+  receiver_uid: string;
+}
+
+function MessageForm({ receiver, getChat }: Props) {
+  const [formInput, setFormInput] = useState<initialState>(initialState);
 
   const { user } = useAuth();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
@@ -23,24 +37,17 @@ function MessageForm({ receiver, getChat }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { ...formInput, sender_uid: user.uid, receiver_uid: receiver.uid };
-    createMessage(payload).then(() => {
-      getChat(user.uid);
-    });
+    const payload: Payload = { ...formInput, sender_uid: user.uid, receiver_uid: receiver.uid };
+  
+    await createMessage(payload);
+    await getChat(user.uid)
     setFormInput(initialState);
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(e);
-    }
-  };
-
   return (
-    <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress} className="chat-box">
+    <Form onSubmit={handleSubmit} className="chat-box">
 
       <FloatingLabel controlId="floatingInput" label="Message" className="mb-2">
         <Form.Control
@@ -58,10 +65,3 @@ function MessageForm({ receiver, getChat }) {
 }
 
 export default MessageForm;
-
-MessageForm.propTypes = {
-  receiver: PropTypes.shape({
-    uid: PropTypes.string,
-  }).isRequired,
-  getChat: PropTypes.func.isRequired,
-};
