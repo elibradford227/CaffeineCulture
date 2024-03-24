@@ -9,9 +9,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <title>Caffeine Culture</title>
-      {/* AuthProvider is first context */}
       <AuthProvider>
-        {/* Notif provider would allow all components here to access notifications state */}
         <NotifProvider>
           {/* gives children components access to user and auth methods */}
           <ViewDirectorBasedOnUserAuthStatus
