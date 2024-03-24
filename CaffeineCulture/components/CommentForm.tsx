@@ -75,7 +75,7 @@ function CommentForm({
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
@@ -83,7 +83,7 @@ function CommentForm({
   };
 
   return (
-    <Form onSubmit={handleSubmit} onKeyDown={handleKeyPress}>
+    <Form onSubmit={handleSubmit}>
 
       <FloatingLabel controlId="floatingInput" label="Comment" className="mb-3">
         <Form.Control
@@ -93,6 +93,7 @@ function CommentForm({
           name="content"
           value={formInput.content}
           onChange={handleChange}
+          onKeyDown={handleKeyPress}
           required
         />
       </FloatingLabel>
