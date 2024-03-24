@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
+import { ConversationData } from '../../utils/interfaces';
 
-export default function ConversationCard({ users }) {
+interface Props {
+  users: ConversationData;
+}
+
+export default function ConversationCard({ users }: Props) {
   const { user } = useAuth();
   const router = useRouter();
 
-  const { username } = router.query;
-
-  console.warn(username);
+  const { username } = router.query as { username: string };
 
   let receiver = 'Unknown';
 
@@ -30,11 +33,3 @@ export default function ConversationCard({ users }) {
     </>
   );
 }
-
-ConversationCard.propTypes = {
-  users: PropTypes.shape({
-    participants: PropTypes.arrayOf(PropTypes.shape({
-      username: PropTypes.string,
-    })),
-  }).isRequired,
-};

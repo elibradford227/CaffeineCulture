@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import { getUsersNotifications } from '../utils/data/notificationData';
-import NotificationCard from '../components/cards/notificationCard';
+import NotificationCard from '../components/cards/NotificationCard';
 import { NotificationData } from '../utils/interfaces';
 
 export default function Notifications() {

@@ -6,9 +6,14 @@ import PropTypes from 'prop-types';
 import { getUserByID } from '../../utils/auth';
 import { markNotificationRead } from '../../utils/data/notificationData';
 import { useNotification } from '../../utils/context/notifContext';
+import { NotificationData, UserData } from '../../utils/interfaces';
 
-export default function NotificationCard({ obj }) {
-  const [route, setRoute] = useState('');
+interface Props {
+  obj: NotificationData;
+}
+
+export default function NotificationCard({ obj }: Props) {
+  const [route, setRoute] = useState<string>('');
   const { notificationCount, updateNotificationCount } = useNotification();
 
   // Defines URL route based upon what type of notification is rendered upon the DOM
@@ -18,17 +23,19 @@ export default function NotificationCard({ obj }) {
     } else if (obj.post) {
       setRoute(`/posts/${obj.post.id}`);
     } else {
-      getUserByID(obj.message.sender).then((res) => {
+      const retrieveUserID = async () => {
+        const res: UserData = await getUserByID(obj.message.sender);
         setRoute(`/messages/${res.username}`);
-      });
+      }
+      retrieveUserID();
     }
   }, [obj]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!obj.is_read) {
       const newCount = notificationCount[0] - 1;
       updateNotificationCount([newCount]);
-      markNotificationRead(obj.id);
+      await markNotificationRead(obj.id);
     }
   };
 
@@ -54,25 +61,3 @@ export default function NotificationCard({ obj }) {
     </>
   );
 }
-
-NotificationCard.propTypes = {
-  obj: PropTypes.shape({
-    id: PropTypes.number,
-    is_read: PropTypes.bool,
-    content: PropTypes.string,
-    comment: PropTypes.shape({
-      post: PropTypes.number,
-      content: PropTypes.string,
-    }),
-    post: PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.string,
-    }),
-    message: PropTypes.shape({
-      sender: PropTypes.number,
-    }),
-    user: PropTypes.shape({
-      uid: PropTypes.string,
-    }),
-  }).isRequired,
-};
