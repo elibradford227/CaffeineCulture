@@ -33,7 +33,7 @@ export default function NotificationCard({ obj }: Props) {
 
   const handleClick = async () => {
     if (!obj.is_read) {
-      const newCount = notificationCount[0] - 1;
+      const newCount: number = notificationCount[0] - 1;
       updateNotificationCount([newCount]);
       await markNotificationRead(obj.id);
     }

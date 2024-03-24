@@ -15,7 +15,7 @@ export default function ConversationCard({ users }: Props) {
 
   const { username } = router.query as { username: string };
 
-  let receiver = 'Unknown';
+  let receiver: string = 'Unknown';
 
   for (let i = 0; i < users?.participants?.length; i++) {
     if (users.participants[i].username !== user.username) {
