@@ -8,6 +8,11 @@ import MessageForm from '../../components/MessageForm';
 import ConversationList from './list';
 import { UserData, MessageData } from '../../utils/interfaces';
 
+interface Payload {
+  sender_uid: string;
+  receiver_uid: string;
+}
+
 export default function Message() {
   const { user } = useAuth();
   const router = useRouter();
@@ -28,7 +33,7 @@ export default function Message() {
 
   const getChat = async (uid: string) => {
     if (receiver.uid) {
-      const payload = { sender_uid: uid, receiver_uid: receiver.uid };
+      const payload: Payload = { sender_uid: uid, receiver_uid: receiver.uid };
       const res = await getConversation(payload);
       setChat(res)
     }

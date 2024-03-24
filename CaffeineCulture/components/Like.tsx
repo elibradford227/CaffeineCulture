@@ -6,9 +6,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createLike, deleteLike } from '../utils/data/likeData';
 import { useAuth } from '../utils/context/authContext';
 
-export default function Like({ postId, liked, likeCount }) {
-  const [hasLiked, setHasLiked] = useState(liked);
-  const [likes, setLikes] = useState(likeCount);
+interface Props {
+  postId: number;
+  liked: boolean;
+  likeCount: number;
+}
+
+interface Payload {
+  uid: string;
+  post: number;
+}
+
+export default function Like({ postId, liked, likeCount }: Props) {
+  const [hasLiked, setHasLiked] = useState<boolean>(liked);
+  const [likes, setLikes] = useState<number>(likeCount);
 
   useEffect(() => {
     setHasLiked(liked);
@@ -23,7 +34,7 @@ export default function Like({ postId, liked, likeCount }) {
 
       setLikes((prevState) => prevState + 1);
 
-      const payload = { uid: user.uid, post: postId };
+      const payload: Payload = { uid: user.uid, post: postId };
       await createLike(payload);
     } catch (error) {
       console.error('Error liking post', error);
