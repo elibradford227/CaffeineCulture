@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { getUsersPosts } from '../../utils/data/postData';
 import { getUserByName } from '../../utils/auth';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import Loading from '../../components/Loading';
 import PostCard from '../../components/cards/PostCard';
 import { createConversation } from '../../utils/data/messageData';
@@ -27,12 +27,12 @@ export default function Username() {
 
   const getUser = async (name: string) => {
     const res = await getUserByName(name);
-    setProfileUser(res);
+    setProfileUser(res as UserData);
   };
 
   const getAllPosts = async (uid: string) => {
     const res = await getUsersPosts(uid);
-    setPosts(res);
+    setPosts(res as PostData[]);
   };
 
   // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists

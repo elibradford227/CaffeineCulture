@@ -1,4 +1,5 @@
 import { Payload } from "../../components/MessageForm";
+import { ConvoPayload } from "../../pages/profile/[username]";
 
 const getMessages = (uid: string) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/messages', {
@@ -131,7 +132,7 @@ const createMessage = (payload: Payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createConversation = (payload: Payload) => new Promise((resolve, reject) => {
+const createConversation = (payload: ConvoPayload) => new Promise((resolve, reject) => {
   fetch('http://localhost:8000/conversations', {
     method: 'POST',
     headers: {

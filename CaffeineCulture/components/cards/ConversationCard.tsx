@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import { ConversationData } from '../../utils/interfaces';
 
 interface Props {

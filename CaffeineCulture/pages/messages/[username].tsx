@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import { getUserByName } from '../../utils/auth';
 import { getConversation } from '../../utils/data/messageData';
 import MessageCard from '../../components/cards/MessageCard';
 import MessageForm from '../../components/MessageForm';
 import ConversationList from './list';
-import { UserData, MessageData } from '../../utils/interfaces';
+import { UserData, MessageData, ConversationData } from '../../utils/interfaces';
 
 interface Payload {
   sender_uid: string;
@@ -24,7 +24,7 @@ export default function Message() {
 
   const getUser = async (name: string) => {
     const res = await getUserByName(name);
-    setReceiver(res);
+    setReceiver(res as UserData);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Message() {
     if (receiver.uid) {
       const payload: Payload = { sender_uid: uid, receiver_uid: receiver.uid };
       const res = await getConversation(payload);
-      setChat(res)
+      setChat(res as MessageData[])
     }
   };
 

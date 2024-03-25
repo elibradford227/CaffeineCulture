@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 import { checkUser } from '../auth';
 import { firebase } from '../client';
-import { UserData } from '../interfaces';
 
 const AuthContext = createContext();
 

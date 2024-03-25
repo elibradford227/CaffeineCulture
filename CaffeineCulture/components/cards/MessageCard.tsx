@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import { UserData } from '../../utils/interfaces';
 import { MessageData } from '../../utils/interfaces';
 

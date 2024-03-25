@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { useAuth } from '../utils/context/authContext';
+import { useAuth } from '../utils/context/authContext.js';
 import { createComment, updateComment, createReply } from '../utils/data/commentData';
 import { CommentData } from '../utils/interfaces';
 

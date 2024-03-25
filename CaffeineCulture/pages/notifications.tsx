@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../utils/context/authContext';
+import { useAuth } from '../utils/context/authContext.js';
 import { getUsersNotifications } from '../utils/data/notificationData';
 import NotificationCard from '../components/cards/NotificationCard';
 import { NotificationData } from '../utils/interfaces';
@@ -10,7 +10,7 @@ export default function Notifications() {
 
   const getNotifications = async (uid: string) => {
     const res = await getUsersNotifications(uid);
-    setNotifications(res)
+    setNotifications(res as NotificationData[])
   };
 
   useEffect(() => {

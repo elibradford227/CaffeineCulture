@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import { getUsersConversations } from '../../utils/data/messageData';
 import ConversationCard from '../../components/cards/ConversationCard';
 import { ConversationData } from '../../utils/interfaces';

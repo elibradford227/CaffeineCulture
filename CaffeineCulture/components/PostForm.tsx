@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { useAuth } from '../utils/context/authContext';
+import { useAuth } from '../utils/context/authContext.js';
 import { createPost, updatePost } from '../utils/data/postData';
 import getCategories from '../utils/data/categoryData';
 import { CategoryData } from '../utils/interfaces';
