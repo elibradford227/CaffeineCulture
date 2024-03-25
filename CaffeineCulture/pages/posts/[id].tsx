@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getSinglePost, deletePost } from '../../utils/data/postData';
 import { getPostsComments } from '../../utils/data/commentData';
 import CommentCard from '../../components/cards/CommentCard';
-import { useAuth } from '../../utils/context/authContext';
+import { useAuth } from '../../utils/context/authContext.js';
 import CommentForm from '../../components/CommentForm';
 import Like from '../../components/Like';
 import { PostData, CommentData } from '../../utils/interfaces';
@@ -43,7 +43,7 @@ export default function SinglePost() {
   const getPostDetails = useCallback(async () => {
     try {
       const postDetailsRes = await getSinglePost(post, user.uid);
-      setPostDetails(postDetailsRes);
+      setPostDetails(postDetailsRes as PostData);
 
       const commentsRes = await getPostsComments(post);
       setComments(commentsRes as CommentData[]);

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
-import { AuthProvider } from '../utils/context/authContext';
+import { AuthProvider } from '../utils/context/authContext.js';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 import { NotifProvider } from '../utils/context/notifContext';
 
