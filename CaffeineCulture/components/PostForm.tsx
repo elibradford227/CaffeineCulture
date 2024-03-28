@@ -7,17 +7,20 @@ import { useAuth } from '../utils/context/authContext.js';
 import { createPost, updatePost } from '../utils/data/postData';
 import getCategories from '../utils/data/categoryData';
 import { CategoryData } from '../utils/interfaces';
+import { s3, generateUploadParams } from '../utils/awss3';
 
 interface initialState {
   title: string;
   content: string;
   category: number;
+  image: string;
 }
 
 const initialState: initialState = {
   title: '',
   content: '',
   category: 0,
+  image: ''
 };
 
 export interface Payload {
@@ -26,10 +29,12 @@ export interface Payload {
   uid: string;
   like_count: number;
   category?: number;
+  image?: string;
 }
 
 function PostForm({ obj }) {
   const [formInput, setFormInput] = useState<initialState>(initialState);
+  const [imgSelect, setImgSelect] = useState(null);
   const [categories, setCategories] = useState<CategoryData[]>([]);
   const router = useRouter();
 
@@ -51,7 +56,7 @@ function PostForm({ obj }) {
     }
   }, [obj]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
@@ -59,14 +64,41 @@ function PostForm({ obj }) {
     }));
   };
 
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageFile = e.target.files[0];
+    setImgSelect(imageFile);
+  };
+
+  const uploadImageTos3 = async (file) => {
+    const params = await generateUploadParams(file.name, file);
+    
+    try {
+      const data = await s3.upload(params).promise();
+      return data.Location;
+    } catch (error) {
+      console.error('File upload failed:', error)
+      throw error
+    }
+  }
+
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const payload: Payload = { ...formInput, uid: user.uid, like_count: 0 };
+
+    if (imgSelect !== null) {
+      const s3url = await uploadImageTos3(imgSelect);
+
+      payload.image = s3url;
+    }
 
     // Convert payload category string value to a number for correct typing
 
     payload.category = Number(payload.category);
+
+    console.warn(payload);
 
     // // Return early with the alert statement to ensure user selects a category
 
@@ -109,6 +141,23 @@ function PostForm({ obj }) {
           required
         />
       </FloatingLabel>
+
+      <Form.Label className="ml-3">Post Image</Form.Label>
+      <div className="d-flex align-items-center">
+        <Form.Control
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="mb-3"
+        />
+        {formInput.image && (
+          <img
+            src={formInput.image}
+            alt="profile"
+            style={{ height: '250px', width: '250px', borderRadius: '0%' }}
+          />
+        )}
+      </div>
 
       <FloatingLabel label="Select Category" className="mt-5 mb-3">
         <Form.Select

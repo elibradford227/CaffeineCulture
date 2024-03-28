@@ -11,6 +11,7 @@ import { useAuth } from '../../utils/context/authContext.js';
 import CommentForm from '../../components/CommentForm';
 import Like from '../../components/Like';
 import { PostData, CommentData } from '../../utils/interfaces';
+import { s3, accessParams } from '../../utils/awss3';
 
 export default function SinglePost() {
   const router = useRouter();
@@ -33,6 +34,21 @@ export default function SinglePost() {
 
   const deleteThisPost = async () => {
     if (window.confirm('Delete post?')) {
+
+      if (postDetails.image_url) {
+        const url: string = postDetails.image_url;
+        const [, fileKey]: string[] = url.split(".com/")
+
+        const params = await accessParams(fileKey);
+
+        try {
+          await s3.deleteObject(params).promise();
+        } catch (error) {
+          console.warn(error)
+          return alert(`Failed to delete file: ${error.message}`);
+        }
+      }
+
       await deletePost(postDetails.id);
       router.push('/');
     }
@@ -74,6 +90,7 @@ export default function SinglePost() {
             </span>
             <hr />
             <h2>{postDetails.content}</h2>
+            <img src={`${postDetails.image_url}`} style={{ maxWidth: "500px", maxHeight: "500px", overflow: "hidden"}}></img>
             <hr />
             <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
 

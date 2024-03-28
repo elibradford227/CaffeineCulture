@@ -25,6 +25,7 @@ export interface PostData {
   user: UserData;
   comments: CommentData[]; 
   liked: boolean;
+  image_url: string;
 }
 
 export interface CategoryData {

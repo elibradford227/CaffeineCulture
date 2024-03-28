@@ -108,6 +108,7 @@ class PostView(ViewSet):
         post = Post.objects.create(
             title = request.data["title"],
             content = request.data["content"],
+            image_url = request.data["image"],
             user = user,
             category = category
         )
@@ -126,6 +127,7 @@ class PostView(ViewSet):
       
         post.title = request.data["title"]
         post.content = request.data["content"]
+        post.image_url = request.data["image"]
         
         user=User.objects.get(uid=request.data["uid"])
         post.user=user
@@ -247,6 +249,6 @@ class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'date', 'like_count', 'category', 'user', 'comments', 'liked')
+        fields = ('id', 'title', 'content', 'date', 'like_count', 'category', 'user', 'comments', 'liked', 'image_url')
         depth = 1
         
