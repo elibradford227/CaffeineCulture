@@ -11,7 +11,7 @@ import PostCard from '../../components/cards/PostCard';
 import { createConversation } from '../../utils/data/messageData';
 import { UserData, PostData } from '../../utils/interfaces';
 
-interface Payload {
+export interface ConvoPayload {
   one_uid: string;
   two_uid: string;
 }
@@ -37,7 +37,7 @@ export default function Username() {
 
   // Handles creation of new conversation thread for accessing chat from messages list. Returns error if conversation already exists
   const handleCreate = async () => {
-    const payload: Payload = { one_uid: user.uid, two_uid: profileUser.uid };
+    const payload: ConvoPayload = { one_uid: user.uid, two_uid: profileUser.uid };
     await createConversation(payload);
   };
 

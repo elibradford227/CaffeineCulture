@@ -9,6 +9,7 @@ class Post(models.Model):
     like_count = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image_url = models.URLField(blank=True)
     
     @property
     def liked(self):
