@@ -67,15 +67,3 @@ export default function Like({ postId, liked, likeCount }: Props) {
     </>
   );
 }
-
-Like.propTypes = {
-  postId: PropTypes.number,
-  liked: PropTypes.bool,
-  likeCount: PropTypes.number,
-};
-
-Like.defaultProps = {
-  postId: 1,
-  liked: false,
-  likeCount: 0,
-};

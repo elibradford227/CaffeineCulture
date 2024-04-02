@@ -127,7 +127,6 @@ class PostView(ViewSet):
       
         post.title = request.data["title"]
         post.content = request.data["content"]
-        post.image_url = request.data["image"]
         
         user=User.objects.get(uid=request.data["uid"])
         post.user=user
@@ -234,7 +233,7 @@ class PostView(ViewSet):
         
         user = get_user_by_uid(uid)
 
-        posts = Post.objects.filter(title__contains=search)
+        posts = Post.objects.filter(title__contains=search).order_by("-id")
         
         posts = self.__get_posts_likes(posts, user)
         

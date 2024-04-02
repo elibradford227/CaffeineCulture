@@ -19,6 +19,8 @@ export default function PostCard({ postObj }: Props) {
         </Link>
         <hr />
         <p>{postObj.content}</p>
+        {postObj.image_url ? <img src={`${postObj.image_url}`} style={{ maxWidth: "500px", maxHeight: "500px", overflow: "hidden"}}></img> : '' }
+            <hr />
         <p>{postObj.category?.name}</p>
         <hr />
         <div className="post-card-footer">
