@@ -90,7 +90,7 @@ export default function SinglePost() {
             </span>
             <hr />
             <h2>{postDetails.content}</h2>
-            <img src={`${postDetails.image_url}`} style={{ maxWidth: "500px", maxHeight: "500px", overflow: "hidden"}}></img>
+            {postDetails.image_url ? <img src={`${postDetails.image_url}`} style={{ maxWidth: "500px", maxHeight: "500px", overflow: "hidden"}}></img> : '' }
             <hr />
             <Like postId={postDetails.id} liked={postDetails.liked} likeCount={postDetails.like_count} />
 
