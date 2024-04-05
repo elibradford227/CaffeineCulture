@@ -25,7 +25,7 @@ export default function NavBar({ user }: Props) {
   useEffect(() => {
     const getCount = async () => {
       const res = await returnNotificationCount(user.uid);
-      updateNotificationCount(res as number);
+      updateNotificationCount(res as number[]);
     }
     getCount();
   }, [user.uid]);
@@ -35,7 +35,7 @@ export default function NavBar({ user }: Props) {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       const res = await returnNotificationCount(user.uid);
-      updateNotificationCount(res as number);
+      updateNotificationCount(res as number[]);
     }, 120000);
 
     return () => clearInterval(intervalId);

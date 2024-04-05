@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { clientCredentials } from './client';
-
 interface UserInfo {
   bio: string;
   username: string;

@@ -13,3 +13,4 @@ services:
       - /app/.next
     ports:
       - 3000:3000
+      - 80:80

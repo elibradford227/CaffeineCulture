@@ -10,6 +10,10 @@ COPY . /app
 
 RUN npm install
 
+RUN npx next build
+
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+EXPOSE 80
+
+CMD ["npm", "start"]
