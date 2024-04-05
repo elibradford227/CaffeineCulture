@@ -24,7 +24,7 @@ export default function NotificationCard({ obj }: Props) {
       setRoute(`/posts/${obj.post.id}`);
     } else {
       const retrieveUserID = async () => {
-        const res: UserData = await getUserByID(obj.message.sender);
+        const res: any = await getUserByID(obj.message.sender);
         setRoute(`/messages/${res.username}`);
       }
       retrieveUserID();
@@ -33,7 +33,7 @@ export default function NotificationCard({ obj }: Props) {
 
   const handleClick = async () => {
     if (!obj.is_read) {
-      const newCount: number = notificationCount[0] - 1;
+      const newCount = notificationCount[0] - 1;
       updateNotificationCount([newCount]);
       await markNotificationRead(obj.id);
     }

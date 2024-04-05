@@ -1,7 +1,8 @@
 import { Payload } from "../../components/CommentForm";
+import { clientCredentials } from "../client";
 
 const getComments = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/comments', {
+  fetch(`${clientCredentials.databaseURL}/comments`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ const getComments = (uid: string) => new Promise((resolve, reject) => {
 });
 
 const getPostsComments = (id: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/comments/${id}/get_single_post_comments`, {
+  fetch(`${clientCredentials.databaseURL}/comments/${id}/get_single_post_comments`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ const getPostsComments = (id: number) => new Promise((resolve, reject) => {
 });
 
 const getSingleComment = (Comment: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/comments/${Comment}`, {
+  fetch(`${clientCredentials.databaseURL}/comments/${Comment}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const getSingleComment = (Comment: number) => new Promise((resolve, reject) => {
 });
 
 const updateComment = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/comments/${payload.id}`, {
+  fetch(`${clientCredentials.databaseURL}/comments/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const updateComment = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const deleteComment = (Comment: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/comments/${Comment}`, {
+  fetch(`${clientCredentials.databaseURL}/comments/${Comment}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const deleteComment = (Comment: number) => new Promise((resolve, reject) => {
 });
 
 const createComment = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/comments', {
+  fetch(`${clientCredentials.databaseURL}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ const createComment = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const createReply = (id: number, payload: Payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/comments/${id}/create_reply`, {
+  fetch(`${clientCredentials.databaseURL}/comments/${id}/create_reply`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

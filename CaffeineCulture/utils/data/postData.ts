@@ -1,7 +1,8 @@
 import { Payload } from "../../components/PostForm";
+import { clientCredentials } from "../client";
 
 const getPosts = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/posts', {
+  fetch(`${clientCredentials.databaseURL}/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ const getPosts = (uid: string) => new Promise((resolve, reject) => {
 });
 
 const getUsersPosts = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/posts/get_user_posts', {
+  fetch(`${clientCredentials.databaseURL}/posts/get_user_posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +40,7 @@ const getUsersPosts = (uid: string) => new Promise((resolve, reject) => {
 });
 
 const searchPosts = (search: string, uid: string) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/posts/search_posts?search=${search}`, {
+  fetch(`${clientCredentials.databaseURL}/posts/search_posts?search=${search}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ const searchPosts = (search: string, uid: string) => new Promise((resolve, rejec
 });
 
 const getSinglePost = (post: number, uid: string) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/posts/${post}`, {
+  fetch(`${clientCredentials.databaseURL}/posts/${post}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ const getSinglePost = (post: number, uid: string) => new Promise((resolve, rejec
 });
 
 const updatePost = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/posts/${payload.id}`, {
+  fetch(`${clientCredentials.databaseURL}/posts/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -89,7 +90,7 @@ const updatePost = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const deletePost = (Post: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/posts/${Post}`, {
+  fetch(`${clientCredentials.databaseURL}/posts/${Post}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ const deletePost = (Post: number) => new Promise((resolve, reject) => {
 });
 
 const createPost = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/posts', {
+  fetch(`${clientCredentials.databaseURL}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

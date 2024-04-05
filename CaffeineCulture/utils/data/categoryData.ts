@@ -1,5 +1,7 @@
+import { clientCredentials } from "../client";
+
 const getCategories = () => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/categories', {
+  fetch(`${clientCredentials.databaseURL}/categories`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

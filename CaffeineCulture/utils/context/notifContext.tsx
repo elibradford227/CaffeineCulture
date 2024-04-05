@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface NotifContext {
-  notificationCount: number;
-  updateNotificationCount: (count: number) => void;
+  notificationCount: number[];
+  updateNotificationCount: (count: number[]) => void;
 }
 
 const NotifContext = createContext<NotifContext | undefined>(undefined);
@@ -14,9 +14,9 @@ interface Props {
 }
 
 const NotifProvider = ({ children }: Props) => {
-  const [notificationCount, setNotificationCount] = useState<number>(0);
+  const [notificationCount, setNotificationCount] = useState<number[]>([0]);
 
-  const updateNotificationCount = (count: number) => {
+  const updateNotificationCount = (count: number[]) => {
     setNotificationCount(count);
   };
 

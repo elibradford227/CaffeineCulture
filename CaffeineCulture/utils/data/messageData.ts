@@ -1,8 +1,9 @@
 import { Payload } from "../../components/MessageForm";
 import { ConvoPayload } from "../../pages/profile/[username]";
+import { clientCredentials } from './../client';
 
 const getMessages = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/messages', {
+  fetch(`${clientCredentials.databaseURL}/messages`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ const getMessages = (uid: string) => new Promise((resolve, reject) => {
 });
 
 const getConversation = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/messages/get_conversation', {
+  fetch(`${clientCredentials.databaseURL}/messages/get_conversation`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -40,8 +41,8 @@ const getConversation = (payload: Payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getUsersConversations = (id: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/conversations/${id}/get_users_conversations`, {
+const getUsersConversations = (id: string) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/conversations/${id}/get_users_conversations`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ const getUsersConversations = (id: number) => new Promise((resolve, reject) => {
 });
 
 const getSingleMessage = (message: number, uid: string) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/messages/${message}`, {
+  fetch(`${clientCredentials.databaseURL}/messages/${message}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ const getSingleMessage = (message: number, uid: string) => new Promise((resolve,
 });
 
 const getUsersLatestMessage = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/messages/get_users_latest_message', {
+  fetch(`${clientCredentials.databaseURL}/messages/get_users_latest_message`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const getUsersLatestMessage = (uid: string) => new Promise((resolve, reject) => 
 });
 
 const updateMessage = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/messages/${payload.id}`, {
+  fetch(`${clientCredentials.databaseURL}/messages/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ const updateMessage = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const deleteMessage = (message: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/messages/${message}`, {
+  fetch(`${clientCredentials.databaseURL}/messages/${message}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const deleteMessage = (message: number) => new Promise((resolve, reject) => {
 });
 
 const createMessage = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/messages', {
+  fetch(`${clientCredentials.databaseURL}/messages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -133,7 +134,7 @@ const createMessage = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const createConversation = (payload: ConvoPayload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/conversations', {
+  fetch(`${clientCredentials.databaseURL}/conversations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

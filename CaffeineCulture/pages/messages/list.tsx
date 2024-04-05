@@ -10,7 +10,7 @@ export default function ConversationList() {
 
   const getConversations = async (id: string) => {
     const res = await getUsersConversations(id);
-    setConversations(res);
+    setConversations(res as any);
   };
 
   useEffect(() => {

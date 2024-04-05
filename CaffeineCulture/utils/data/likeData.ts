@@ -1,7 +1,8 @@
 import { Payload } from "../../components/Like";
+import { clientCredentials } from "../client";
 
 const getLikes = (uid: string) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/likes', {
+  fetch(`${clientCredentials.databaseURL}/likes`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ const getLikes = (uid: string) => new Promise((resolve, reject) => {
 });
 
 const getSingleLike = (Like: number) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/likes/${Like}`, {
+  fetch(`${clientCredentials.databaseURL}/likes/${Like}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -32,7 +33,7 @@ const getSingleLike = (Like: number) => new Promise((resolve, reject) => {
 });
 
 const updateLike = (payload) => new Promise((resolve, reject) => {
-  fetch(`http://localhost:8000/likes/${payload.id}`, {
+  fetch(`${clientCredentials.databaseURL}/likes/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const updateLike = (payload) => new Promise((resolve, reject) => {
 });
 
 const deleteLike = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/likes/delete_like', {
+  fetch(`${clientCredentials.databaseURL}/likes/delete_like`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const deleteLike = (payload: Payload) => new Promise((resolve, reject) => {
 });
 
 const createLike = (payload: Payload) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/likes', {
+  fetch(`${clientCredentials.databaseURL}/likes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
