@@ -87,10 +87,23 @@ WSGI_APPLICATION = 'caffeineculture.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# SQLITE DB FOR DEV
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# POSTGRES DB FOR "PROD"
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER' : 'hero',
+        'PASSWORD' : 'ilovedogs',
+        'HOST' : 'ccdb.cn80uwcus05m.us-east-1.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
