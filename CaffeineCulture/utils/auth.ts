@@ -44,7 +44,7 @@ const getUserByName = (username: string) => new Promise((resolve, reject) => {
 });
 
 const getUserByID = (id: number) => new Promise((resolve, reject) => {
-  fetch('http://localhost:8000/get_user_by_id', {
+  fetch(`${clientCredentials.databaseURL}/get_user_by_id`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
