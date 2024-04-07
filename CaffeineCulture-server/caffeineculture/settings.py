@@ -96,13 +96,24 @@ WSGI_APPLICATION = 'caffeineculture.wsgi.application'
 # }
 
 # POSTGRES DB FOR "PROD"
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER' : 'hero',
+#         'PASSWORD' : 'ilovedogs',
+#         'HOST' : 'ccdb.cn80uwcus05m.us-east-1.rds.amazonaws.com',
+#         'PORT' : '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'ccdb',
         'USER' : 'hero',
         'PASSWORD' : 'ilovedogs',
-        'HOST' : 'ccdb.cn80uwcus05m.us-east-1.rds.amazonaws.com',
+        'HOST' : 'localhost',
         'PORT' : '5432',
     }
 }
