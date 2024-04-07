@@ -26,6 +26,7 @@ Finding community doesn't have to be intimidating, and Caffeine Culture makes it
 - Edit post details by clicking the edit symbol on the post details page
 - Delete a post by clicking the delete symbol on the post details page, which deletes any associated comments and likes
 - Click "Create Post" to populate the DOM with a form to create a new post
+- Upload images to posts
 
 <em>Comments</em>
 - Comment on posts

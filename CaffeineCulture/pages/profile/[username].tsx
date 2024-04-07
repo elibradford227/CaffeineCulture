@@ -48,12 +48,6 @@ export default function Username() {
     }
   }, [profileUser.uid, username]);
 
-  if (posts.length === 0) {
-    return (
-      <Loading />
-    );
-  }
-
   return (
     <div>
       <div id="profile">
