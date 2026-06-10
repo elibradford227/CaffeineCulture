@@ -46,11 +46,11 @@ Finding community doesn't have to be intimidating, and Caffeine Culture makes it
 
 ### Conversation Participants
 
-Conversations currently store participant user IDs directly on the conversation record as a list. This implementation was sufficient for supporting direct messages, but a future iteration would introduce a ConversationParticipant join table to  support multi-user conversations as the current design doesn't satisfy 1NF.
+Conversations currently store participant user IDs directly on the conversation record as a list. This implementation was sufficient for supporting direct messages, but a future iteration would introduce a ConversationParticipant join table to support multi-user conversations as the current design doesn't satisfy 1NF.
 
 ### Post Like Aggregation
 
-Post likes are summed from the Like table at query time rather than stored as a persistent aggregate value. This approach prioritizes data consistency and simplicity. For larger scale deployments, post query results could be cached to reduce aggregation overhead on frequently accessed posts.
+Post likes are summed from the Like table at query time rather than stored as a persistent aggregate value (the attribute ```like_count``` is always 0 in the database). This approach prioritizes data consistency and simplicity. For larger scale deployments, post query results could be cached to reduce aggregation overhead on frequently accessed posts. 
 
 ![ERD](https://github.com/elibradford227/CaffeineCultureCapstone/assets/114545170/3367565c-fe78-4ae3-8d1e-a15c72b4b42a)
 
